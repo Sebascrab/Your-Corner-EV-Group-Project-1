@@ -8,21 +8,21 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-<a href="https://github.com/Kurohyou/your-corner-ev">
+<a href="https://github.com/Kurohyou-Studios/your-corner-ev">
 <img src="images/logo.png" alt="Logo" width="80" height="80">
 </a>
 <h3 align="center">Your Corner EV</h3>
 <p align="center">
 A Tracker to find the closest available charging station for your EV.
 <br/>
-<a href="https://github.com/Kurohyou/your-corner-ev"><strong>Explore the docs »</strong></a>
+<a href="https://github.com/Kurohyou-Studios/your-corner-ev"><strong>Explore the docs »</strong></a>
 <br/>
 <br/>
-<a href="https://github.com/Kurohyou/your-corner-ev">View Demo</a>
+<a href="https://github.com/Kurohyou-Studios/your-corner-ev">View Demo</a>
 ·
-<a href="https://github.com/Kurohyou/your-corner-ev/issues">Report Bug</a>
+<a href="https://github.com/Kurohyou-Studios/your-corner-ev/issues">Report Bug</a>
 ·
-<a href="https://github.com/Kurohyou/your-corner-ev/issues">Request Feature</a>
+<a href="https://github.com/Kurohyou-Studios/your-corner-ev/issues">Request Feature</a>
 </p>
 </div>
 <!-- TABLE OF CONTENTS -->
@@ -78,7 +78,7 @@ TODO
 
 ## Roadmap
 TODO
-See the [open issues](https://github.com/Kurohyou/your-corner-ev/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/Kurohyou-Studios/your-corner-ev/issues) for a full list of proposed features (and known issues).
 <p align="right">(<a href="#top">back to top</a>)</p>
 <!-- CONTRIBUTING -->
 
@@ -101,7 +101,7 @@ Distributed under the MIT License. See [LICENSE.txt](LICENSE.txt) for more infor
 
 ## Contact
 Scott Casey - [@Kurohyoustudios](https://twitter.com/Kurohyoustudios) - scaseydv@gmail.com
-Project Link: [https://github.com/Kurohyou/your-corner-ev](https://github.com/Kurohyou/your-corner-ev)
+Project Link: [https://github.com/Kurohyou-Studios/your-corner-ev](https://github.com/Kurohyou-Studios/your-corner-ev)
 <p align="right">(<a href="#top">back to top</a>)</p>
 <!-- ACKNOWLEDGMENTS -->
 
@@ -113,16 +113,16 @@ This readme template adapted from the [Best-README-Template](https://github.com/
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/Kurohyou/your-corner-ev.svg?style=flat
-[contributors-url]: https://github.com/Kurohyou/your-corner-ev/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/Kurohyou/your-corner-ev.svg?style=flat
-[forks-url]: https://github.com/Kurohyou/your-corner-ev/network/members
-[stars-shield]: https://img.shields.io/github/stars/Kurohyou/your-corner-ev.svg?style=flat
-[stars-url]: https://github.com/Kurohyou/your-corner-ev/stargazers
-[issues-shield]: https://img.shields.io/github/issues/Kurohyou/your-corner-ev.svg?style=flat
-[issues-url]: https://github.com/Kurohyou/your-corner-ev/issues
-[license-shield]: https://img.shields.io/github/license/Kurohyou/your-corner-ev.svg?style=flat
-[license-url]: https://github.com/Kurohyou/your-corner-ev/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/Kurohyou-Studios/your-corner-ev.svg?style=flat
+[contributors-url]: https://github.com/Kurohyou-Studios/your-corner-ev/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/Kurohyou-Studios/your-corner-ev.svg?style=flat
+[forks-url]: https://github.com/Kurohyou-Studios/your-corner-ev/network/members
+[stars-shield]: https://img.shields.io/github/stars/Kurohyou-Studios/your-corner-ev.svg?style=flat
+[stars-url]: https://github.com/Kurohyou-Studios/your-corner-ev/stargazers
+[issues-shield]: https://img.shields.io/github/issues/Kurohyou-Studios/your-corner-ev.svg?style=flat
+[issues-url]: https://github.com/Kurohyou-Studios/your-corner-ev/issues
+[license-shield]: https://img.shields.io/github/license/Kurohyou-Studios/your-corner-ev.svg?style=flat
+[license-url]: https://github.com/Kurohyou-Studios/your-corner-ev/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/Kurohyou
 [patreon-shield]: https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Dkurohyoustudios%26type%3Dpatrons&style=flat
