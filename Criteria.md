@@ -33,6 +33,17 @@ const getLocation = async function(zip){
 };
 getLocation(84124);
 ```
+```md
+When we open the page
+THEN we are presented with an input for location, fuel type, payment network, etc.
+WHEN we start typing in the location
+THEN it presents us with option to use current location, or presents possible locations based on input
+WHEN we click on a location
+THEN We're presented with a map and list of nearby charging stations
+WHEN we click on a charging station
+THEN we are presented with info about the station
+```
+
 <!-- URL Variables -->
 [NREL-alt-fuel]: https://developer.nrel.gov/docs/transportation/alt-fuel-stations-v1/
 [Geolocation-url]: https://app.abstractapi.com/api/ip-geolocation/tester
