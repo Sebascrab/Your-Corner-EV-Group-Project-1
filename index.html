@@ -5,6 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="style.css">
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
@@ -57,18 +59,17 @@
           </div>
           <div class="column is-6-tablet is-8-desktop is-half has-text-centered">
             <form>
-              <div class="field">
-                <label for="location" class="label">location</label>
-                <div class="control">
-                  <input type="search" name="location" id="location" class="input" placeholder="Address | Zip Code" list="possible-locations">
-                  <datalist id="possible-locations">
-                    <option>Use Current Location</option>
-                  </datalist>
+              <div class="field has-addons">
+                <div class="control is-expanded has-icons-left">
+                  <input type="search" name="location" id="location" class="input" placeholder="Location in the US" list="possible-locations">
+                  <datalist id="possible-locations"></datalist>
+                  <span class="icon is-left">
+                    <i class="material-icons">place</i>
+                  </span>
                 </div>
-              </div>
-              <div class="field is-grouped is-grouped-centered">
                 <div class="control">
-                  <button type="submit" class="button is-primary">Find Your Corner EV</button>
+                  <button class="button is-info">use my current location 
+                    <i class="material-icons">gps_fixed</i></button>
                 </div>
               </div>
             </form>
