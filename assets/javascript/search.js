@@ -1,7 +1,9 @@
 const $datalist = $('#possible-locations');
 const $searchInput = $('input[name="location"]');
 const $form = $('form');
+const $foundNames = $('#foundNames');
 const userLocations = {};
+const nrelak = 'kKioVYWtLSheIYeuhhDJEcNsDNdivdWsT3R0ayO4';
 /**
  * Function copied from https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_debounce. Delays execution of a function until `wait` time has passed to prevent a function from being called too frequently.
  * @param {function} func - The function to call
@@ -23,8 +25,6 @@ const userLocations = {};
     }
   };
 };
-
-//#region City searching
 /**
  * Removes a location option from the search datalist as well as from the object of possible user locations.
  * @param {JQUERYCollection} $opt - The Jquery collection/element to work on
@@ -33,6 +33,97 @@ const removeLocationOption = ($opt) => {
   delete userLocations[$opt.title];
   $opt.remove();
 }
+
+/**
+ * 
+ * @param {string} [bulmaState] - The bulma state to add to the element. If omitted, all status tags are removed.
+ * @param {JQUERYCollection} [$element = $searchInput] - The jQuery element(s) to manipulate the state on.
+ */
+const setSearchState = (bulmaState,$element = $searchInput) => {
+  $element.removeClass('is-success is-danger is-info is-warning is-loading');
+  if(bulmaState){
+    $element.addClass(`is-${bulmaState}`);
+  }
+}
+
+/**
+ * Clones the contents of the indicated template.
+ * @param {string} id - The template ID to get
+ * @param {string|number|jQuery Object} [toAppend] - Content to append to the cloned template
+ * @returns {jQuery Object}
+ */
+const getTemplate = (id,toAppend)=>{
+  const template = $(
+    document
+      .getElementById(id)
+      .content
+      .firstElementChild
+      .cloneNode(true)
+  );
+  if(toAppend){
+    template.append(toAppend);
+  }
+  return template;
+}
+
+/**
+ * Loads the rest of the form once a valid location has been selected
+ */
+const loadFinalForm = () => {
+  setSearchState('success');
+  if(!document.getElementById('advanced-options')){
+    getTemplate('final-form').appendTo($form);
+    $('#fuel-type').change(fuelSpecificOptions);
+  }
+};
+
+//Validate that there are enough characters to search with
+const validInput = () => {
+  const text = $searchInput.val();
+  return text.length >= 3 ?
+    text :
+    false;
+};
+//#region station searching
+
+const getNearestStations = function(parameters={}){
+  const paramString = Object.entries(parameters).map(([key,val])=>`${key}=${val}`).join('&');
+  return fetch(`https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=${nrelak}&${paramString}`)
+    .then(response => response.json());
+}
+const findStations = async () => {
+  const selectedLocation = userLocations[$searchInput.val()];
+  const params = {
+    latitude: selectedLocation.lat,
+    longitude:selectedLocation.lng,
+    radius:$('#search-radius').val(),
+    fuel_type:$('#fuel-type').val()
+  };
+  const $evNetwork = $('#ev-network');
+  if($evNetwork[0]){
+    params.ev_network = $evNetwork.val();
+  }
+  const response = await getNearestStations(params);
+  $foundNames.empty();
+  console.log(response);
+  response.fuel_stations.forEach((station)=>{
+    const $li = $('<li></li>',{'class':'is-flex'});
+    ['station_name','street_address','ev_network'].forEach(
+      (prop) => {
+        const $span = $('<span></span>');
+        $span.append(station[prop]);
+        $li.append($span);
+      }
+    )
+    $foundNames.append($li);
+  });
+  $form.find(':is(input,select)').removeAttr('disabled');
+  setSearchState(null,$('form button[type="submit"]'))
+};
+//#endregion
+
+//#region Listener Functions
+//#region City searching
 
 /**
  * Searches for cities that match the users input. Uses the HERE geolocation API to find matching geolocations based on street address, city, state, and/or zip code. When a single city is selected, it loads the rest of the search form.
@@ -89,81 +180,62 @@ const searchCities = async ()=>{
   if(result.items.length > 1){
     setSearchState('info');
     return;
+  }else if(text === result.items[0].title){
+    loadFinalForm();
   }
 };
-
-/**
- * Loads the rest of the form once a valid location has been selected
- */
-const loadFinalForm = () => {
-  setSearchState('success');
-  $(
-    `
-    <div class="field is-grouped">
-      <div class="control field">
-        <label for="search-radius" class="label">distance</label>
-        <div class="control has-icons-right">
-          <input type="number" name="search-radius" id="search-radius" class="input" value="10">
-          <span class="icon is-right">
-            <span>mi</span>
-          </span>
-        </div>
-      </div>
-      <div class="control is-expanded field">
-        <label for="fuel-type" class="label">fuel type</label>
-        <div class="control has-icons-left">
-          <select name="fuel-type" id="fuel-type" class="input">
-            <option value="">Select a fuel type</option>
-            <option value="all">all</option>
-            <option value="BD">biodiesel (B20 and above)</option>
-            <option value="cng">compressed natural gas (CNG)</option>
-            <option value="ELEC">electric</option>
-            <option value="E85">ethanol (E85)</option>
-            <option value="HY">hydrogen</option>
-            <option value="LNG">liquefied natural gas (LNG)</option>
-            <option value="LPG">propane (LPG)</option>
-          </select>
-          <span class="icon is-left">
-            <i class="material-icons">bolt</i>
-          </span>
-        </div>
-      </div>
-    </div>
-    <div class="field is-grouped is-grouped-centered" id="submit-container">
-      <div class="control">
-        <button type="submit" class="button is-primary">find your corner ev</button>
-      </div>
-    </div>
-    `).appendTo($form);
-};
-
-/**
- * 
- * @param {string} [bulmaState] - The bulma state to add to the element. If omitted, all status tags are removed.
- * @param {JQUERYCollection} [$element = $searchInput] - The jQuery element(s) to manipulate the state on.
- */
-const setSearchState = (bulmaState,$element = $searchInput) => {
-  $element.removeClass('is-success is-danger is-info is-warning');
-  if(bulmaState){
-    $element.addClass(`is-${bulmaState}`);
-  }
-}
 //Debounce the search function to prevent excessive API calls
 const debouncedSearch = debounce(searchCities,250);
 
-//Validate that there are enough characters to search with
-const validInput = ()=>{
-  const text = $searchInput.val();
-  return text.length >= 3 ?
-    text :
-    false;
+//#endregion City searching
+const verifySelections = (event)=>{
+  event.preventDefault();
+  const $fuelType = $('#fuel-type');
+  const $evNetwork = $('#ev-network');
+  const $searchRadius = $('#search-radius');
+  if(// Verify that the user has input the minimum required data
+    !userLocations[$searchInput.val()] ||
+    ($fuelType[0] && !$fuelType.val()) ||
+    ($searchRadius[0] && !$searchRadius.val())
+  ){
+    if(!userLocations[$searchInput.val()]){
+      setSearchState('danger');
+    }
+    if($fuelType[0] && !$fuelType.val()){
+      setSearchState('danger',$($fuelType[0].parentElement));
+    }
+    if($searchRadius[0] && !$searchRadius.val()){
+      setSearchState('danger',$searchRadius);
+    }
+    return;
+  }
+  [$($fuelType[0].parentElement),$($evNetwork[0].parentElement),$searchRadius]
+    .forEach($elem => {
+      if($elem[0]){
+        setSearchState('success',$elem);
+      }
+    });
+  $form.find(':is(input,select)').attr('disabled',true);
+  setSearchState('loading',$('form button[type="submit"]'))
+  findStations();
 };
 
+/**
+ * Shows/hides the fuel type specific search options based on what fuel type is selected.
+ * @param {DOMEvent} event - The event that triggered the function
+ */
+const fuelSpecificOptions = (event) => {
+  console.log('value',event.target.value)
+  if(event.target.value === 'ELEC' || event.target.value === 'all'){
+    getTemplate('elec-pay-options')
+      .appendTo($('#advanced-options'));
+  }else{
+    $('#electric-options').remove();
+  }
+};
+//#endregion Listener Functions
+//#region Listener declarations
+$form.submit(verifySelections);
 $searchInput.on('input',debouncedSearch);
 $searchInput.change(debouncedSearch);
-
-//#endregion City searching
-const findStations = (event)=>{
-  event.preventDefault();
-};
-$form.submit(findStations);
+//#endregion
