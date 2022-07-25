@@ -7,7 +7,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="style.css">
-    <script></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
+  type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
+  type="text/javascript" charset="utf-8"></script>
   </head>
   <body>
     <nav class="navbar has-shadow is-primary">
@@ -53,7 +56,22 @@
             </p>
           </div>
           <div class="column is-6-tablet is-8-desktop is-half has-text-centered">
-            <p>This Column is for the location search box and button etc.</p>
+            <form>
+              <div class="field">
+                <label for="location" class="label">location</label>
+                <div class="control">
+                  <input type="search" name="location" id="location" class="input" placeholder="Address | Zip Code" list="possible-locations">
+                  <datalist id="possible-locations">
+                    <option>Use Current Location</option>
+                  </datalist>
+                </div>
+              </div>
+              <div class="field is-grouped is-grouped-centered">
+                <div class="control">
+                  <button type="submit" class="button is-primary">Find Your Corner EV</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -68,11 +86,12 @@
         </div>
       </div>
     </section>
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Initialize HERE API -->
+    <script src="assets/javascript/here-ini.js">
+    </script>
     <script src="assets/javascript/script.js"></script>
+    <!-- Search code -->
+    <script src="assets/javascript/search.js"></script>
   </body>
 </htmlź
