@@ -13,6 +13,8 @@
   type="text/javascript" charset="utf-8"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
   type="text/javascript" charset="utf-8"></script>
+  <!-- Need to insert Fontawesome -->
+     <script src=""></script>
   </head>
   <body>
     <nav class="navbar has-shadow is-primary">
@@ -46,51 +48,36 @@
         </ul>
       </nav>
     </div>
-    <!-- Product Information  -->
-    <section class="section">
-      <div class="container">
-        <div class="columns is-vcentered">
-          <div class="column is-6-tablet is-5-desktop is-half has-text-centered">
-            <h1 class="is-size-3-mobile is-size-1-desktop title">Welcome To Corner EV</h1>
-            <h2 class="is-size-3-mobile is-size-2-desktop subtitle">Looking For A Place To Charge?</h2>
-            <p>Look no further, the Charge dEV's got your back! Corner EV is used to find EV charging stations closest to you.
-              Not only can you find your nearest charging staion, but you can also search for alternative fuel stations in your area. 
-              Planning a trip? Enter the location and make sure you'll be charged wherever you go. 
-            </p>
-          </div>
-          <div class="column is-6-tablet is-8-desktop is-half has-text-centered">
-            <form>
-              <div class="field has-addons">
-                <div class="control is-expanded has-icons-left">
-                  <input type="search" name="location" id="location" class="input" placeholder="Location in the US" list="possible-locations">
-                  <datalist id="possible-locations"></datalist>
-                  <span class="icon is-left">
-                    <i class="material-icons">place</i>
-                  </span>
-                </div>
-                <div class="control has-icons-right">
-                  <button class="input button is-info">use my current location</button>
-                  <span class="icon is-right">
-                    <i class="material-icons">gps_fixed</i>
-                  </span>
-                </div>
+    <!-- Contact Form  -->
+    <div class="container my-5 mt-5 mx-5 px-5">
+      <h2 class="title is-2 is-capitalized">Contact Us</h2>
+      <form action="" method="post">
+          <div class="field">
+              <label for="name" class="label is-size-4 has-text-weight-light"></label>
+              <div class="control has-icons-left">
+                  <input type="text" name="name" id="name" class="input" placeholder="Name" autofocus>
+                      <span class="icon is-left">
+                          <i class="fa fa-user"></i>
+                      </span>
               </div>
-            </form>
-            <ul id="foundNames"></ul>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="columns is-8 is variable">
-          <div class="column is-6-tablet">
-            <p>Cool people charge. Stay cool, and stay charged. - Charge dEV's</p>
+          <div class="field">
+              <label for="email" class="label is-size-4 has-text-weight-light"></label>
+              <div class="control has-icons-left">
+                  <input type="email" name="email" id="email" class="input" placeholder="Email">
+                      <span class="icon is-left">
+                          <i class="fa fa-envelope"></i>
+                      </span>
+              </div>
           </div>
-        </div>
-      </div>
-    </section>
+          <div class="field">
+              <label for="message" class="label is-size-4 has-text-weight-light"></label>
+              <textarea name="message" id="message" rows="5" class="textarea is-medium" placeholder="Message"></textarea>
+          </div>
+          <button type="submit" class="button is-success is-size-5">Submit</button>
+      </form>
+  </div>
+         
 
     <!-- JS scripts -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
