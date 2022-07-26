@@ -209,7 +209,7 @@ const verifySelections = (event)=>{
     }
     return;
   }
-  [$($fuelType[0].parentElement),$($evNetwork[0].parentElement),$searchRadius]
+  [$($fuelType[0]?.parentElement),$($evNetwork[0]?.parentElement),$searchRadius]
     .forEach($elem => {
       if($elem[0]){
         setSearchState('success',$elem);
