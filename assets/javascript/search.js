@@ -4,6 +4,7 @@ const $form = $('form');
 const $foundNames = $('#foundNames');
 const $currentButton = $('#current-location');
 const userLocations = {};
+const stationMarkers = {};
 const nrelak = 'kKioVYWtLSheIYeuhhDJEcNsDNdivdWsT3R0ayO4';
 /**
  * Function copied from https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_debounce. Delays execution of a function until `wait` time has passed to prevent a function from being called too frequently.
@@ -92,8 +93,43 @@ const getNearestStations = function(parameters={}){
   return fetch(`https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=${nrelak}&${paramString}`)
     .then(response => response.json());
 }
+
+/**
+ * Creates the map and adds markers for each station to it
+ * @param {object} selectedLocation - Object holding the latitude/longitude of the user's location
+ * @param {object} stations - The stations that were found within the search area
+ */
+const createMap = (selectedLocation,stations) => {
+  const map = new H.Map(
+    document.getElementById('map-container'),
+    defaultLayers.vector.normal.map,
+    {
+      zoom:10,
+      center:selectedLocation
+    }
+  );
+  const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
+  const ui = H.ui.UI.createDefault(map,defaultLayers);
+  const group = new H.map.Group();
+  stations.forEach((station) => {
+
+    const marker = new H.map.Marker({lat:station.latitude,lng:station.longitude},{data:{...station}});
+    stationMarkers[station.station_name] = marker;
+    group.addObject(marker);
+  });
+  map.addObject(group);
+  console.log(stationMarkers);
+  group.addEventListener('tap',(event)=>{
+    console.log(event.target.getData());
+  });
+  map.getViewModel().setLookAtData({
+    bounds: group.getBoundingBox()
+  });
+};
+
 const findStations = async () => {
-  const selectedLocation = userLocations[$searchInput.val()];
+  const locationName = $searchInput.val() || 'USECURRENT';
+  const selectedLocation = userLocations[locationName];
   const params = {
     latitude: selectedLocation.lat,
     longitude:selectedLocation.lng,
@@ -104,20 +140,10 @@ const findStations = async () => {
   if($evNetwork[0]){
     params.ev_network = $evNetwork.val();
   }
+  console.log('selectedLocation',selectedLocation);
   const response = await getNearestStations(params);
-  $foundNames.empty();
-  console.log(response);
-  response.fuel_stations.forEach((station)=>{
-    const $li = $('<li></li>',{'class':'is-flex'});
-    ['station_name','street_address','ev_network'].forEach(
-      (prop) => {
-        const $span = $('<span></span>');
-        $span.append(station[prop]);
-        $li.append($span);
-      }
-    )
-    $foundNames.append($li);
-  });
+
+  createMap(selectedLocation,response.fuel_stations);
   $form.find(':is(input,select)').removeAttr('disabled');
   setSearchState(null,$('form button[type="submit"]'))
 };
@@ -214,11 +240,11 @@ const verifySelections = (event)=>{
   const $evNetwork = $('#ev-network');
   const $searchRadius = $('#search-radius');
   if(// Verify that the user has input the minimum required data
-    !userLocations[$searchInput.val()] ||
+    ($searchInput.attr('placeholder') !== 'Using Current Location' && !userLocations[$searchInput.val()]) ||
     ($fuelType[0] && !$fuelType.val()) ||
     ($searchRadius[0] && !$searchRadius.val())
   ){
-    if(!userLocations[$searchInput.val()]){
+    if($searchInput.attr('placeholder') !== 'Using Current Location' && !userLocations[$searchInput.val()]){
       setSearchState('danger');
     }
     if($fuelType[0] && !$fuelType.val()){
