@@ -11,7 +11,9 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
   type="text/javascript" charset="utf-8"></script>
-    <script type="module" src="https://js.api.here.com/v3/3.1/mapsjs.bundle.js"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
+  type="text/javascript" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/619ebb2432.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <nav class="navbar has-shadow is-primary">
@@ -68,7 +70,7 @@
                   </span>
                 </div>
                 <div class="control has-icons-right">
-                  <button class="input button is-info">use my current location</button>
+                  <button id="current-location" class="input button is-info">use my current location</button>
                   <span class="icon is-right">
                     <i class="material-icons">gps_fixed</i>
                   </span>
@@ -113,9 +115,9 @@
               </span>
             </div>
           </div>
-          <div class="control is-expanded field">
+          <div class="control field">
             <label for="fuel-type" class="label">fuel type</label>
-            <div class="control is-expanded has-icons-left">
+            <div class="control has-icons-left">
               <div class="select is-fullwidth">
                 <select name="fuel-type" id="fuel-type">
                   <option value="">Select a fuel type</option>
@@ -140,54 +142,76 @@
             <button type="submit" class="button is-primary">find your corner ev</button>
           </div>
         </div>
-    </div>
+      </div>
     </template>
-    <template id="elec-pay-options">
-      <div class="control field" id="electric-options">
-        <label for="pay-network" class="label">ev network</label>
-        <div class="control has-icons-left">
-          <div class="select">
-            <select name="ev-network" id="ev-network" class="select">
-              <option value="all">All</option>
-              <option value="AddÉnergie Technologies">AddÉnergie</option>
-              <option value="AMPUP">AmpUp</option>
-              <option value="BCHYDRO">BC Hydro</option>
-              <option value="Blink Network">Blink</option>
-              <option value="CHARGELAB">ChargeLab</option>
-              <option value="ChargePoint Network">ChargePoint</option>
-              <option value="Circuit électrique">Circuit électrique</option>
-              <option value="eCharge Network">eCharge Network</option>
-              <option value="Electrify America">Electrify America</option>
-              <option value="Electrify Canada">Electrify Canada</option>
-              <option value="EVCS">EV Charging Solutions</option>
-              <option value="EV Connect">EV Connect</option>
-              <option value="EVGATEWAY">evGateway</option>
-              <option value="eVgo Network">EVgo</option>
-              <option value="FLO">FLO</option>
-              <option value="FPLEV">FPL EVolution</option>
-              <option value="FCN">Francis</option>
-              <option value="Greenlots">Greenlots</option>
-              <option value="IVY">Ivy</option>
-              <option value="LIVINGSTON">Livingston Energy Group</option>
-              <option value="Non-Networked">Non-Networked</option>
-              <option value="OpConnect">OpConnect</option>
-              <option value="PETROCAN">Petro-Canada</option>
-              <option value="POWERFLEX">PowerFlex</option>
-              <option value="RIVIAN_ADVENTURE">Rivian Adventure Network</option>
-              <option value="RIVIAN_WAYPOINTS">Rivian Waypoints</option>
-              <option value="SemaCharge Network">SemaConnect</option>
-              <option value="Sun Country Highway">Sun Country Highway</option>
-              <option value="SWTCH">Swtch Energy</option>
-              <option value="Tesla Destination">Tesla Destination</option>
-              <option value="Tesla">Tesla Supercharger</option>
-              <option value="Volta">Volta</option>
-              <option value="Webasto">Webasto</option>
-              <option value="ZEFNET">ZEF Network</option>
-            </select>
+    <template id="elec-options">
+      <div class="field is-grouped" id="electric-options">
+        <div class="control field">
+          <label for="pay-network" class="label">ev network</label>
+          <div class="control has-icons-left">
+            <div class="select">
+              <select name="ev-network" id="ev-network" class="select">
+                <option value="all" selected>All</option>
+                <option value="AddÉnergie Technologies">AddÉnergie</option>
+                <option value="AMPUP">AmpUp</option>
+                <option value="BCHYDRO">BC Hydro</option>
+                <option value="Blink Network">Blink</option>
+                <option value="CHARGELAB">ChargeLab</option>
+                <option value="ChargePoint Network">ChargePoint</option>
+                <option value="Circuit électrique">Circuit électrique</option>
+                <option value="eCharge Network">eCharge Network</option>
+                <option value="Electrify America">Electrify America</option>
+                <option value="Electrify Canada">Electrify Canada</option>
+                <option value="EVCS">EV Charging Solutions</option>
+                <option value="EV Connect">EV Connect</option>
+                <option value="EVGATEWAY">evGateway</option>
+                <option value="eVgo Network">EVgo</option>
+                <option value="FLO">FLO</option>
+                <option value="FPLEV">FPL EVolution</option>
+                <option value="FCN">Francis</option>
+                <option value="Greenlots">Greenlots</option>
+                <option value="IVY">Ivy</option>
+                <option value="LIVINGSTON">Livingston Energy Group</option>
+                <option value="Non-Networked">Non-Networked</option>
+                <option value="OpConnect">OpConnect</option>
+                <option value="PETROCAN">Petro-Canada</option>
+                <option value="POWERFLEX">PowerFlex</option>
+                <option value="RIVIAN_ADVENTURE">Rivian Adventure Network</option>
+                <option value="RIVIAN_WAYPOINTS">Rivian Waypoints</option>
+                <option value="SemaCharge Network">SemaConnect</option>
+                <option value="Sun Country Highway">Sun Country Highway</option>
+                <option value="SWTCH">Swtch Energy</option>
+                <option value="Tesla Destination">Tesla Destination</option>
+                <option value="Tesla">Tesla Supercharger</option>
+                <option value="Volta">Volta</option>
+                <option value="Webasto">Webasto</option>
+                <option value="ZEFNET">ZEF Network</option>
+              </select>
+            </div>
+            <span class="icon is-left">
+              <i class="material-icons">payment</i>
+            </span>
           </div>
-          <span class="icon is-left">
-            <i class="material-icons">payment</i>
-          </span>
+        </div>
+        <div class="control field">
+          <label for="ev-charger" class="label">ev connector</label>
+          <div class="control has-icons-left">
+            <div class="select">
+              <select name="ev-charger" id="ev-charger">
+                <option value="all">All</option>
+                <option value="NEMA1450" selected>NEMA 14-50</option>
+                <option value="NEMA515">NEMA 5-15</option>
+                <option value="NEMA520">NEMA 5-20</option>
+                <option value="J1772">J1772</option>
+                <option value="J1772COMBO">J1772COMBO</option>
+                <option value="CHADEMO">CHAdeMO</option>
+                <option value="TESLA">Tesla</option>
+              </select>
+              <span class="icon is-left">
+                <i class="material-icons">outlet</i>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </template>
