@@ -2,6 +2,7 @@
 const platform = new H.service.Platform({
   apikey:'vHQte2zrv9XJ0YDqEdRTXf1WmE1fCCzbxnOVxs-JarU'
 });
+const defaultLayers = platform.createDefaultLayers();
 //Initatie Geocoding service
 const geocoder = platform.getSearchService();
 
