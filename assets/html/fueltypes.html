@@ -8,18 +8,19 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
   type="text/javascript" charset="utf-8"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
   type="text/javascript" charset="utf-8"></script>
+    <script src="https://kit.fontawesome.com/619ebb2432.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <nav class="navbar has-shadow is-primary">
       <!-- logo in navbar -->
       <div class="navbar-brand">
         <a class="navbar-item">
-          <img src="assets/images/Corner-EV-Logo.png" alt="site logo" style="max-height: 70px" class="py-2 px-2"> 
+          <i class="fa-solid fa-charging-station fa-xl"></i> 
         </a>
         <!-- Burger dropdown menu for smaller screens -->
         <a class="navbar-burger" id="burger">
@@ -49,51 +50,83 @@
     <!-- Make each one of these fuel options a card or container!-->
     <section class="section">
         <div class="container">
-            <h3 class="title has-text-centered is-size-4">Fuel Type</h3>
+            <h3 class="title has-text-centered is-size-3">Fuel Types</h3>
             <div class="columns mt-5 is-8 is-multiline">
                 <div class="column is-one-third">
-                    <div class="card">
+                    <div class="card notification is-success">
                         <div class="card-content">
+                            <h2 class="title has-text-centered is-size-5">Biodiesel</h2>
                             <p>This is a renewable fuel that can be made from animal fats, vegetable oils, or recycled cooking oil for use in diesel vehicles</p>
-                            <p class="title is-size-5"></p>
                         </div>
+                        <footer class="card-footer">
+                          <p class="card-footer-item">
+                            <a href="https://en.wikipedia.org/wiki/Biodiesel" class="has-bold-text has-text-cyan">Learn More</a>
+                          </p>
+                        </footer>
                     </div>
                 </div>
                 <div class="column is-one-third">
-                  <div class="card">
+                  <div class="card notification is-danger">
                       <div class="card-content">
-                          <p>This is a renewable fuel that can be made from animal fats, vegetable oils, or recycled cooking oil for use in diesel vehicles</p>
-                          <p class="title is-size-5"></p>
+                          <h2 class="title has-text-centered is-size-5">Electricity</h2>
+                          <p class="has-text-centered">Electricity can be used to power plug-in hybrid as well as electric vehicles. In North America, there are three connector types: J1772, CCS1, and Tesla.
+                          </p>
                       </div>
+                      <footer class="card-footer">
+                        <p class="card-footer-item">
+                          <a href="https://en.wikipedia.org/wiki/Charging_station" class="has-bold-text has-text-cyan">Learn More</a>
+                        </p>
+                      </footer>
                   </div>
               </div>
               <div class="column is-one-third">
-                <div class="card">
+                <div class="card notification is-warning">
                     <div class="card-content">
-                        <p>This is a renewable fuel that can be made from animal fats, vegetable oils, or recycled cooking oil for use in diesel vehicles</p>
-                        <p class="title is-size-5"></p>
+                        <h2 class="title has-text-centered is-size-5">Ethanol</h2>
+                        <p>Ethanol is a widely used renewable fuel from corn and other plant materials. Different vehicle makes and models require specific ethanol contents.</p>
                     </div>
+                    <footer class="card-footer">
+                      <p class="card-footer-item">
+                        <a href="https://en.wikipedia.org/wiki/Ethanol_fuel_in_the_United_States" class="has-bold-text has-text-cyan">Learn More</a>
+                      </p>
+                    </footer>
                 </div>
             </div><div class="column is-one-third">
-              <div class="card">
+              <div class="card notification has-background-grey">
                   <div class="card-content">
-                      <p>This is a renewable fuel that can be made from animal fats, vegetable oils, or recycled cooking oil for use in diesel vehicles</p>
-                      <p class="title is-size-5"></p>
+                      <h2 class="title has-text-centered is-size-5">Hydrogen</h2>
+                      <p>Hydrogen is a less common emissions free alternative fuel that is produced from domestic resources for us in vehicles with fuel cells.</p>
                   </div>
+                  <footer class="card-footer">
+                    <p class="card-footer-item">
+                      <a href="https://en.wikipedia.org/wiki/Hydrogen_fuel" class="has-bold-text has-text-cyan">Learn More</a>
+                    </p>
+                  </footer>
               </div>
           </div><div class="column is-one-third">
-            <div class="card">
+            <div class="card notification is-info">
                 <div class="card-content">
-                    <p>This is a renewable fuel that can be made from animal fats, vegetable oils, or recycled cooking oil for use in diesel vehicles</p>
-                    <p class="title is-size-5"></p>
+                    <h2 class="title has-text-centered is-size-5">Natural Gas</h2>
+                    <p>Natural gas is a domestically abundant gas-based fuel that has significant fuel cost savings over gasoline and diesel fuels.</p>
                 </div>
+                <footer class="card-footer">
+                  <p class="card-footer-item">
+                    <a href="https://en.wikipedia.org/wiki/Natural_gas" class="has-bold-text has-text-cyan">Learn More</a>
+                  </p>
+                </footer>
             </div>
         </div><div class="column is-one-third">
-          <div class="card">
+          <div class="card notification brown-card">
+            <!--make this card brown-->
               <div class="card-content">
-                  <p>This is a renewable fuel that can be made from animal fats, vegetable oils, or recycled cooking oil for use in diesel vehicles</p>
-                  <p class="title is-size-5"></p>
+                  <h2 class="title has-text-centered is-size-5">Propane</h2>
+                  <p>Propane is a readily available gas-based fuel that is well known and has been used in vehicles for many years.</p>
               </div>
+              <footer class="card-footer">
+                <p class="card-footer-item">
+                  <a href="https://en.wikipedia.org/wiki/Propane" class="has-bold-text has-text-cyan">Learn More</a>
+                </p>
+              </footer>
           </div>
       </div>
             </div>
