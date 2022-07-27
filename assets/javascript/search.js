@@ -6,6 +6,8 @@ const $currentButton = $('#current-location');
 const userLocations = {};
 const stationMarkers = {};
 const nrelak = 'kKioVYWtLSheIYeuhhDJEcNsDNdivdWsT3R0ayO4';
+const map = {};
+const mapContainer = document.getElementById('map-container');
 /**
  * Function copied from https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_debounce. Delays execution of a function until `wait` time has passed to prevent a function from being called too frequently.
  * @param {function} func - The function to call
@@ -54,18 +56,13 @@ const setSearchState = (bulmaState,$element = $searchInput) => {
  * @param {string|number|jQuery Object} [toAppend] - Content to append to the cloned template
  * @returns {jQuery Object}
  */
-const getTemplate = (id,toAppend)=>{
-  const template = $(
-    document
-      .getElementById(id)
-      .content
-      .firstElementChild
-      .cloneNode(true)
-  );
-  if(toAppend){
-    template.append(toAppend);
-  }
-  return template;
+const getTemplate = (id,keys={})=>{
+  //Get the template item
+  const $template = $(`#${id}`);
+  //Extract the html code for the template as text.
+  const templateText = $('<div></div>').text($template.html()).text();
+  //Render the template as html using the provided keys and the Mustache library
+  return $(Mustache.render(templateText,keys));
 }
 
 /**
@@ -94,37 +91,87 @@ const getNearestStations = function(parameters={}){
     .then(response => response.json());
 }
 
+const twoDecimals = (num)=>{
+  return Math.round(num * 100) / 100;
+}
+
 /**
  * Creates the map and adds markers for each station to it
  * @param {object} selectedLocation - Object holding the latitude/longitude of the user's location
  * @param {object} stations - The stations that were found within the search area
  */
 const createMap = (selectedLocation,stations) => {
-  const map = new H.Map(
-    document.getElementById('map-container'),
+  mapContainer.innerHTML = '';
+  map.map = new H.Map(
+    mapContainer,
     defaultLayers.vector.normal.map,
     {
       zoom:10,
-      center:selectedLocation
-    }
+      center:selectedLocation,
+      padding:{top:100,left:100,bottom:100,right:100}
+    },
   );
-  const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
-  const ui = H.ui.UI.createDefault(map,defaultLayers);
-  const group = new H.map.Group();
+  map.behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map.map));
+  map.ui = H.ui.UI.createDefault(map.map,defaultLayers);
+  map.ui.setUnitSystem(H.ui.UnitSystem.IMPERIAL);
+  map.group = new H.map.Group();
+  console.log(stations);
   stations.forEach((station) => {
-
-    const marker = new H.map.Marker({lat:station.latitude,lng:station.longitude},{data:{...station}});
+    const data = {
+      header:{
+        title:station.station_name,
+      },
+      content:{
+        address:{
+          street:station.street_address,
+          city:station.city,
+          state:station.state,
+          zip:station.zip
+        },
+        phone:station.station_phone,
+        hours:station.access_days_time,
+        evNetwork:station.ev_network,
+        'level1':station.ev_level1_evse_num,
+        'level2':station.ev_level2_evse_num,
+        'DCFast':station.ev_dc_fast_num,
+        'other':station.ev_other_evse
+      }
+    };
+    data.content = Object.entries(data.content).reduce((memo,[key,val]) => {
+      if(val){
+        memo[key] = val;
+      }
+      return memo;
+    },{})
+    const marker = new H.map.Marker({lat:station.latitude,lng:station.longitude},{data});
     stationMarkers[station.station_name] = marker;
-    group.addObject(marker);
+    map.group.addObject(marker);
   });
-  map.addObject(group);
+  map.map.addObject(map.group);
   console.log(stationMarkers);
-  group.addEventListener('tap',(event)=>{
-    console.log(event.target.getData());
+  map.group.addEventListener('tap',createPopup);
+  map.map.getViewModel().setLookAtData({
+    bounds: map.group.getBoundingBox()
   });
-  map.getViewModel().setLookAtData({
-    bounds: group.getBoundingBox()
+};
+
+/**
+ * Removes previously created bubbles from the map. Code from https://stackoverflow.com/a/33834185
+ */
+const clearBubbles = () => {
+  map.ui.getBubbles().forEach(bub => map.ui.removeBubble(bub));
+}
+
+
+const createPopup = (event)=>{
+  clearBubbles();
+  console.log(event.target);
+  const template = getTemplate('marker-content',event.target.getData())[0];
+  console.log(template);
+  const bubble = new H.ui.InfoBubble(event.target.getGeometry(), {
+    content:template
   });
+  map.ui.addBubble(bubble);
 };
 
 const findStations = async () => {
@@ -285,4 +332,9 @@ $currentButton.click(useCurrentLocation);
 $form.submit(verifySelections);
 $searchInput.on('input',debouncedSearch);
 $searchInput.change(debouncedSearch);
+window.addEventListener('resize',()=>{
+  if(map.map){
+    map.map.getViewPort().resize();
+  }
+})
 //#endregion

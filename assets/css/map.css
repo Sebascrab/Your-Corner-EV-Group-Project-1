@@ -1,3 +1,18 @@
 #map-container:empty{
   display:none;
 }
+.H_ib_content{
+  margin:0;
+  max-width:90%;
+}
+.H_ib_content > .card p{
+  margin-bottom:0;
+}
+.H_ib_content > .card{
+  width:max-content;
+  box-shadow:none;
+}
+.station-info{
+  display:grid;
+  grid-template-columns:auto 1fr;
+}
