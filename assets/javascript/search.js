@@ -2,6 +2,7 @@ const $datalist = $('#possible-locations');
 const $searchInput = $('input[name="location"]');
 const $form = $('form');
 const $foundNames = $('#foundNames');
+const $currentButton = $('#current-location');
 const userLocations = {};
 const nrelak = 'kKioVYWtLSheIYeuhhDJEcNsDNdivdWsT3R0ayO4';
 /**
@@ -124,6 +125,25 @@ const findStations = async () => {
 
 //#region Listener Functions
 //#region City searching
+/**
+ * Gets the user's current location using HTML 5 geolocationAPI
+ */
+const useCurrentLocation = async ()=>{
+  setSearchState('loading is-info',$currentButton);
+  $searchInput.attr('placeholder','Getting your location');
+  const coords = await new Promise(resolve =>{
+    navigator.geolocation.getCurrentPosition(position => {
+      resolve(position.coords);
+    });
+  });
+  userLocations['USECURRENT'] = {
+    lat:coords.latitude,
+    lng:coords.longitude
+  };
+  setSearchState('info',$currentButton);
+  $searchInput.attr('placeholder','Using Current Location');
+  loadFinalForm();
+};
 
 /**
  * Searches for cities that match the users input. Uses the HERE geolocation API to find matching geolocations based on street address, city, state, and/or zip code. When a single city is selected, it loads the rest of the search form.
@@ -227,14 +247,15 @@ const verifySelections = (event)=>{
 const fuelSpecificOptions = (event) => {
   console.log('value',event.target.value)
   if(event.target.value === 'ELEC' || event.target.value === 'all'){
-    getTemplate('elec-pay-options')
-      .appendTo($('#advanced-options'));
+    getTemplate('elec-options')
+      .insertAfter($('#advanced-options'));
   }else{
     $('#electric-options').remove();
   }
 };
 //#endregion Listener Functions
 //#region Listener declarations
+$currentButton.click(useCurrentLocation);
 $form.submit(verifySelections);
 $searchInput.on('input',debouncedSearch);
 $searchInput.change(debouncedSearch);
