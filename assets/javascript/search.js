@@ -85,6 +85,11 @@ const validInput = () => {
 };
 //#region station searching
 
+/**
+ * Initiates a fetch request to NREL to look for nearby stations.
+ * @param {object} parameters - The query parameters to send in the API fetch call
+ * @returns {Promise} - Resolves to the json parsed data on nearby stations from NREL
+ */
 const getNearestStations = function(parameters={}){
   const paramString = Object.entries(parameters).map(([key,val])=>`${key}=${val}`).join('&');
   return fetch(`https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=${nrelak}&${paramString}`)
@@ -162,7 +167,10 @@ const clearBubbles = () => {
   map.ui.getBubbles().forEach(bub => map.ui.removeBubble(bub));
 }
 
-
+/**
+ * Creates an infobubble for the clicked marker
+ * @param {EventObject} event - The event that triggered the function
+ */
 const createPopup = (event)=>{
   clearBubbles();
   console.log(event.target);
@@ -174,6 +182,9 @@ const createPopup = (event)=>{
   map.ui.addBubble(bubble);
 };
 
+/**
+ * Collects the user's input to query NREL for nearby stations. Calls `createMap()` to create the map.
+ */
 const findStations = async () => {
   const locationName = $searchInput.val() || 'USECURRENT';
   const selectedLocation = userLocations[locationName];
@@ -281,6 +292,11 @@ const searchCities = async ()=>{
 const debouncedSearch = debounce(searchCities,250);
 
 //#endregion City searching
+
+/**
+ * Invoked when the user submits the search form. Checks all inputs to make sure that a valid option has been selected, or valid entry made.
+ * @param {EventObject} event - The event that triggered the function
+ */
 const verifySelections = (event)=>{
   event.preventDefault();
   const $fuelType = $('#fuel-type');
@@ -327,6 +343,7 @@ const fuelSpecificOptions = (event) => {
   }
 };
 //#endregion Listener Functions
+
 //#region Listener declarations
 $currentButton.click(useCurrentLocation);
 $form.submit(verifySelections);
