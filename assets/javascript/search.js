@@ -362,8 +362,10 @@ $form.submit(verifySelections);
 $searchInput.on('input',debouncedSearch);
 $searchInput.change(debouncedSearch);
 window.addEventListener('resize',()=>{
+  //If a map has been created, resize it when the viewport is resized.
   if(map.map){
     map.map.getViewPort().resize();
   }
-})
+});
+//TODO: Add storage of favorite stations
 //#endregion
