@@ -102,6 +102,7 @@ const twoDecimals = (num)=>{
 
 /**
  * Creates the map and adds markers for each station to it
+ * TODO: Add fuel type icons/custom markers to the map instead of the default HERE markers.
  * @param {object} selectedLocation - Object holding the latitude/longitude of the user's location
  * @param {object} stations - The stations that were found within the search area
  */
@@ -122,6 +123,7 @@ const createMap = (selectedLocation,stations) => {
   map.group = new H.map.Group();
   console.log(stations);
   stations.forEach((station) => {
+    //The data to store on the marker. This data is used by createPopup() to use the Mustache Renderer to create the card for a given marker.
     const data = {
       header:{
         title:station.station_name,
@@ -295,6 +297,7 @@ const debouncedSearch = debounce(searchCities,250);
 
 /**
  * Invoked when the user submits the search form. Checks all inputs to make sure that a valid option has been selected, or valid entry made.
+ * TODO: Add verification of connector type input
  * @param {EventObject} event - The event that triggered the function
  */
 const verifySelections = (event)=>{
@@ -331,6 +334,7 @@ const verifySelections = (event)=>{
 
 /**
  * Shows/hides the fuel type specific search options based on what fuel type is selected.
+ * TODO: Prevent duplicate fuel specific items from being created when they already exist on the page
  * @param {DOMEvent} event - The event that triggered the function
  */
 const fuelSpecificOptions = (event) => {
