@@ -6,6 +6,8 @@ const $currentButton = $('#current-location');
 const userLocations = {};
 const stationMarkers = {};
 const nrelak = 'kKioVYWtLSheIYeuhhDJEcNsDNdivdWsT3R0ayO4';
+const map = {};
+const mapContainer = document.getElementById('map-container');
 /**
  * Function copied from https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_debounce. Delays execution of a function until `wait` time has passed to prevent a function from being called too frequently.
  * @param {function} func - The function to call
@@ -54,18 +56,13 @@ const setSearchState = (bulmaState,$element = $searchInput) => {
  * @param {string|number|jQuery Object} [toAppend] - Content to append to the cloned template
  * @returns {jQuery Object}
  */
-const getTemplate = (id,toAppend)=>{
-  const template = $(
-    document
-      .getElementById(id)
-      .content
-      .firstElementChild
-      .cloneNode(true)
-  );
-  if(toAppend){
-    template.append(toAppend);
-  }
-  return template;
+const getTemplate = (id,keys={})=>{
+  //Get the template item
+  const $template = $(`#${id}`);
+  //Extract the html code for the template as text.
+  const templateText = $('<div></div>').text($template.html()).text();
+  //Render the template as html using the provided keys and the Mustache library
+  return $(Mustache.render(templateText,keys));
 }
 
 /**
@@ -88,10 +85,19 @@ const validInput = () => {
 };
 //#region station searching
 
+/**
+ * Initiates a fetch request to NREL to look for nearby stations.
+ * @param {object} parameters - The query parameters to send in the API fetch call
+ * @returns {Promise} - Resolves to the json parsed data on nearby stations from NREL
+ */
 const getNearestStations = function(parameters={}){
   const paramString = Object.entries(parameters).map(([key,val])=>`${key}=${val}`).join('&');
   return fetch(`https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=${nrelak}&${paramString}`)
     .then(response => response.json());
+}
+
+const twoDecimals = (num)=>{
+  return Math.round(num * 100) / 100;
 }
 
 /**
@@ -100,33 +106,85 @@ const getNearestStations = function(parameters={}){
  * @param {object} stations - The stations that were found within the search area
  */
 const createMap = (selectedLocation,stations) => {
-  const map = new H.Map(
-    document.getElementById('map-container'),
+  mapContainer.innerHTML = '';
+  map.map = new H.Map(
+    mapContainer,
     defaultLayers.vector.normal.map,
     {
       zoom:10,
-      center:selectedLocation
-    }
+      center:selectedLocation,
+      padding:{top:100,left:100,bottom:100,right:100}
+    },
   );
-  const behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
-  const ui = H.ui.UI.createDefault(map,defaultLayers);
-  const group = new H.map.Group();
+  map.behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map.map));
+  map.ui = H.ui.UI.createDefault(map.map,defaultLayers);
+  map.ui.setUnitSystem(H.ui.UnitSystem.IMPERIAL);
+  map.group = new H.map.Group();
+  console.log(stations);
   stations.forEach((station) => {
-
-    const marker = new H.map.Marker({lat:station.latitude,lng:station.longitude},{data:{...station}});
+    const data = {
+      header:{
+        title:station.station_name,
+      },
+      content:{
+        address:{
+          street:station.street_address,
+          city:station.city,
+          state:station.state,
+          zip:station.zip
+        },
+        phone:station.station_phone,
+        hours:station.access_days_time,
+        evNetwork:station.ev_network,
+        'level1':station.ev_level1_evse_num,
+        'level2':station.ev_level2_evse_num,
+        'DCFast':station.ev_dc_fast_num,
+        'other':station.ev_other_evse
+      }
+    };
+    data.content = Object.entries(data.content).reduce((memo,[key,val]) => {
+      if(val){
+        memo[key] = val;
+      }
+      return memo;
+    },{})
+    const marker = new H.map.Marker({lat:station.latitude,lng:station.longitude},{data});
     stationMarkers[station.station_name] = marker;
-    group.addObject(marker);
+    map.group.addObject(marker);
   });
-  map.addObject(group);
+  map.map.addObject(map.group);
   console.log(stationMarkers);
-  group.addEventListener('tap',(event)=>{
-    console.log(event.target.getData());
-  });
-  map.getViewModel().setLookAtData({
-    bounds: group.getBoundingBox()
+  map.group.addEventListener('tap',createPopup);
+  map.map.getViewModel().setLookAtData({
+    bounds: map.group.getBoundingBox()
   });
 };
 
+/**
+ * Removes previously created bubbles from the map. Code from https://stackoverflow.com/a/33834185
+ */
+const clearBubbles = () => {
+  map.ui.getBubbles().forEach(bub => map.ui.removeBubble(bub));
+}
+
+/**
+ * Creates an infobubble for the clicked marker
+ * @param {EventObject} event - The event that triggered the function
+ */
+const createPopup = (event)=>{
+  clearBubbles();
+  console.log(event.target);
+  const template = getTemplate('marker-content',event.target.getData())[0];
+  console.log(template);
+  const bubble = new H.ui.InfoBubble(event.target.getGeometry(), {
+    content:template
+  });
+  map.ui.addBubble(bubble);
+};
+
+/**
+ * Collects the user's input to query NREL for nearby stations. Calls `createMap()` to create the map.
+ */
 const findStations = async () => {
   const locationName = $searchInput.val() || 'USECURRENT';
   const selectedLocation = userLocations[locationName];
@@ -234,6 +292,11 @@ const searchCities = async ()=>{
 const debouncedSearch = debounce(searchCities,250);
 
 //#endregion City searching
+
+/**
+ * Invoked when the user submits the search form. Checks all inputs to make sure that a valid option has been selected, or valid entry made.
+ * @param {EventObject} event - The event that triggered the function
+ */
 const verifySelections = (event)=>{
   event.preventDefault();
   const $fuelType = $('#fuel-type');
@@ -280,9 +343,15 @@ const fuelSpecificOptions = (event) => {
   }
 };
 //#endregion Listener Functions
+
 //#region Listener declarations
 $currentButton.click(useCurrentLocation);
 $form.submit(verifySelections);
 $searchInput.on('input',debouncedSearch);
 $searchInput.change(debouncedSearch);
+window.addEventListener('resize',()=>{
+  if(map.map){
+    map.map.getViewPort().resize();
+  }
+})
 //#endregion

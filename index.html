@@ -8,8 +8,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <link rel="stylesheet" href="./assets/css/map.css">
     <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
   type="text/javascript" charset="utf-8"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
@@ -20,6 +18,8 @@
     <link rel="stylesheet" type="text/css"
         href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
     <script src="https://kit.fontawesome.com/619ebb2432.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/map.css">
   </head>
   <body>
     <!-- <nav class="navbar has-shadow is-primary">
@@ -276,6 +276,73 @@
         </div>
       </div>
     </template>
+    <template id="marker-content">
+      <div class="marker card">
+        {{#image}}
+          <div class="card-image is-centered">
+            <figure class="image">
+              <img src="{{image}}" alt="{{imagealt}}">
+            </figure>
+          </div>
+        {{/image}}
+        <div class="card-content">
+          {{#header}}
+            <div class="media">
+              <div class="media-content">
+                <h4 class="title is-5">{{title}}</h4>
+              </div>
+              <div class="media-right">
+                {{#headericons-material}}
+                  {{#.}}
+                    <span class="icon">
+                      <i class="material-icons">{{.}}</i>
+                    </span>
+                  {{/.}}
+                {{/headericons-material}}
+                {{#headericons-fa}}
+                  {{#.}}
+                  <span class="icon">
+                    <i class="fas {{.}}" aria-hidden="true"></i>
+                  </span>
+                  {{/.}}
+                {{/headericons-fa}}
+              </div>
+            </div>
+          {{/header}}
+          {{#content}}
+            <div class="content">
+              {{#address}}
+                <p>{{street}}</p>
+                <p>{{city}}, {{state}} {{zip}}</p>
+              {{/address}}
+              <div class="station-info">
+                {{#phone}}
+                  <h5>phone:</h5><span>{{phone}}</span>
+                {{/phone}}
+                {{#hours}}
+                  <h5>hours:</h5><span>{{hours}}</span>
+                {{/hours}}
+                {{#evNetwork}}
+                  <h5>EV Network:</h5><span>{{evNetwork}}</span>
+                {{/evNetwork}}
+                {{#level1}}
+                  <h5>level 1 ports:</h5><span>{{level1}}</span>
+                {{/level1}}
+                {{#level2}}
+                  <h5>level 2 ports:</h5><span>{{level2}}</span>
+                {{/level2}}
+                {{#DCFast}}
+                  <h5>DC fast ports:</h5><span>{{DCFast}}</span>
+                {{/DCFast}}
+                {{#other}}
+                  <h5>other ports:</h5><span>{{other}}</span>
+                {{/other}}
+              </div>
+            </div>
+          {{/content}}
+        </div>
+      </div>
+    </template>
     <!-- End Bulma Templates -->
       <!-- This is the footer -->
       <footer class="footer">
@@ -287,7 +354,12 @@
         </div>
       </footer>
     <!-- JS scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"
+        integrity="sha512-HYiNpwSxYuji84SQbCU5m9kHEsRqwWypXgJMBtbRSumlx1iBB6QaxgEBZHSHEGM+fKyCX/3Kb5V5jeVXm0OglQ=="
+        crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script type="text/worker">
+    </script>
     <!-- Initialize HERE API -->
     <script src="assets/javascript/here-ini.js">
     </script>
