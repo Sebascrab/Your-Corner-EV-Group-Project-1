@@ -12,8 +12,8 @@ var localStorageData = JSON.parse(localStorage.getItem('FavoriteStations'))||[];
 var fuelIcon = {
   BD:"../images/biodiesel.png",
   cng:"../images/cng.png",
-  ELEC:"../images/elec.png",
-  E85:"../images/E85.png",
+  ELEC:"https://github.com/Kurohyou-Studios/your-corner-ev/blob/main/assets/images/elec.png?raw=true",
+  E85:"https://github.com/Kurohyou-Studios/your-corner-ev/blob/main/assets/images/E85.png?raw=true",
   HY:"../images/hydrogen.png",
   LNG:"../images/cng.png",
   LPG:"../images/propane.png"
