@@ -350,8 +350,10 @@ const verifySelections = (event)=>{
 const fuelSpecificOptions = (event) => {
   console.log('value',event.target.value)
   if(event.target.value === 'ELEC' || event.target.value === 'all'){
-    getTemplate('elec-options')
+    if(!document.getElementById('electric-options')){
+      getTemplate('elec-options')
       .insertAfter($('#advanced-options'));
+    }
   }else{
     $('#electric-options').remove();
   }
@@ -379,5 +381,5 @@ window.addEventListener('resize',()=>{
   }
 });
 //TODO: Add storage of favorite stations
-  
+
 //#endregion
