@@ -8,6 +8,7 @@ const stationMarkers = {};
 const nrelak = 'kKioVYWtLSheIYeuhhDJEcNsDNdivdWsT3R0ayO4';
 const map = {};
 const mapContainer = document.getElementById('map-container');
+var localStorageData = JSON.parse(localStorage.getItem('FavoriteStations'))||[];
 //#region Helper Functions
 /**
  * Function copied from https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_debounce. Delays execution of a function until `wait` time has passed to prevent a function from being called too frequently.
@@ -122,6 +123,7 @@ const createMap = (selectedLocation,stations) => {
   stations.forEach((station) => {
     //The data to store on the marker. This data is used by createPopup() to use the Mustache Renderer to create the card for a given marker.
     const data = {
+      favList: station.id,
       header:{
         title:station.station_name,
       },
@@ -356,6 +358,14 @@ const fuelSpecificOptions = (event) => {
     $('#electric-options').remove();
   }
 };
+const modifyLocal = async (event) => {
+  console.log(event);
+  const favLocals = $(event.target);
+  const stationId = favLocals.data('favorite');
+  localStorageData.push(stationId);
+  localStorageData = [...new Set(localStorageData)];
+  localStorage.setItem('FavoriteStations',JSON.stringify(localStorageData));
+}
 //#endregion Listener Functions
 
 //#region Listener declarations
@@ -363,6 +373,7 @@ $currentButton.click(useCurrentLocation);
 $form.submit(verifySelections);
 $searchInput.on('input',debouncedSearch);
 $searchInput.change(debouncedSearch);
+$('#map-container').on('click','#favButton',modifyLocal);
 window.addEventListener('resize',()=>{
   //If a map has been created, resize it when the viewport is resized.
   if(map.map){
