@@ -22,37 +22,15 @@
     <link rel="stylesheet" href="./assets/css/map.css">
   </head>
   <body>
-    <!-- <nav class="navbar has-shadow is-primary">
-      <!-- logo in navbar -->
-      <!-- <div class="navbar-brand">
-        <a class="navbar-item">
-          <img src="assets/images/Corner-EV-Logo.png" alt="site logo" style="max-height: 70px" class="py-2 px-2"> 
-        </a>
-        <!-- Burger dropdown menu for smaller screens -->
-        <!-- <a class="navbar-burger" id="burger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </a>
-      </div> -->
-      <!-- <div class="navbar-menu" id="nav-links">
-        <div class="navbar-end">
-          <a href='index.html' class="navbar-item">Home</a>
-          <a href='./assets/html/fueltypes.html' class="navbar-item">Charging And Fuel Information </a>
-          <a href='./assets/html/questions.html' class="navbar-item">Questions</a>
-          <a href='./assets/html/contact.html' class="navbar-item">Contact</a>
-        </div>
-      </div> -->
-    <!-- </nav> --> 
     <!-- Hero W/ Navbar -->
-    <section class="hero is-primary is-medium">
+    <section class="hero is-primary is-medium is-warning">
       <!-- Hero head: will stick at the top -->
       <div class="hero-head">
         <nav class="navbar">
           <div class="container">
             <div class="navbar-brand">
               <a class="navbar-item">
-                <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo">
+                <i class="fa-solid fa-charging-station fa-xl"></i>
               </a>
               <a class="navbar-burger" id="burger" data-target="navbar-menu">
                 <span></span>
@@ -123,14 +101,14 @@
             <form>
               <div class="field has-addons">
                 <div class="control is-expanded has-icons-left">
-                  <input type="search" name="location" id="location" class="input" placeholder="Location in the US" list="possible-locations">
+                  <input type="search" name="location" id="location" class="input" placeholder="Location In The USA" list="possible-locations">
                   <datalist id="possible-locations"></datalist>
                   <span class="icon is-left">
                     <i class="material-icons">place</i>
                   </span>
                 </div>
                 <div class="control has-icons-right">
-                  <button id="current-location" class="input button is-info">use my current location</button>
+                  <button id="current-location" class="input button is-info">Use My Current Location</button>
                   <span class="icon is-right">
                     <i class="material-icons">gps_fixed</i>
                   </span>
@@ -142,13 +120,17 @@
           </div>
         </div>
       </div>
-    </section>
+      <!-- Favorites Cards -->
+      <div id="savedFavStations">
 
+      </div>
+    </section>
+    <!-- Footer And Slogan -->
     <section class="section">
       <div class="container">
         <div class="columns is-8 is variable">
           <div class="column is-6-tablet">
-            <p><strong><i>Cool people charge. Stay cool, and stay charged. - Charge dEV's</i></strong></p>
+            <p><strong><i>Cool People Charge. Stay Cool, And Stay Charged. - Charge dEV's</i></strong></p>
           </div>
         </div>
       </div>
@@ -168,7 +150,7 @@
       <div>
         <div class="field is-grouped" id="advanced-options">
           <div class="control field">
-            <label for="search-radius" class="label">distance</label>
+            <label for="search-radius" class="label">Distance</label>
             <div class="control has-icons-right">
               <input type="number" name="search-radius" id="search-radius" class="input" value="10">
               <span class="icon is-right">
@@ -177,19 +159,19 @@
             </div>
           </div>
           <div class="control field">
-            <label for="fuel-type" class="label">fuel type</label>
+            <label for="fuel-type" class="label">Fuel Type</label>
             <div class="control has-icons-left">
               <div class="select is-fullwidth">
                 <select name="fuel-type" id="fuel-type">
-                  <option value="">Select a fuel type</option>
-                  <option value="all">all</option>
-                  <option value="BD">biodiesel (B20 and above)</option>
-                  <option value="cng">compressed natural gas (CNG)</option>
-                  <option value="ELEC">electric</option>
-                  <option value="E85">ethanol (E85)</option>
-                  <option value="HY">hydrogen</option>
-                  <option value="LNG">liquefied natural gas (LNG)</option>
-                  <option value="LPG">propane (LPG)</option>
+                  <option value="">Select A Fuel Type</option>
+                  <option value="all">All</option>
+                  <option value="BD">Biodiesel (B20 And Above)</option>
+                  <option value="cng">Compressed Natural Gas (CNG)</option>
+                  <option value="ELEC">Electric</option>
+                  <option value="E85">Ethanol (E85)</option>
+                  <option value="HY">Hydrogen</option>
+                  <option value="LNG">Liquefied Natural Gas (LNG)</option>
+                  <option value="LPG">Propane (LPG)</option>
                 </select>
               </div>
               <span class="icon is-left">
@@ -200,7 +182,7 @@
         </div>
         <div class="field is-grouped is-grouped-centered" id="submit-container">
           <div class="control">
-            <button type="submit" class="button is-primary">find your corner ev</button>
+            <button type="submit" class="button is-primary">Find Your Corner EV</button>
           </div>
         </div>
       </div>
@@ -208,7 +190,7 @@
     <template id="elec-options">
       <div class="field is-grouped" id="electric-options">
         <div class="control field">
-          <label for="pay-network" class="label">ev network</label>
+          <label for="pay-network" class="label">EV Network</label>
           <div class="control has-icons-left">
             <div class="select">
               <select name="ev-network" id="ev-network" class="select">
@@ -255,7 +237,7 @@
           </div>
         </div>
         <div class="control field">
-          <label for="ev-charger" class="label">ev connector</label>
+          <label for="ev-charger" class="label">EV Connector</label>
           <div class="control has-icons-left">
             <div class="select">
               <select name="ev-charger" id="ev-charger">
@@ -276,18 +258,22 @@
         </div>
       </div>
     </template>
+    <!-- Bulma Template - HTML -->
     <template id="marker-content">
       <div class="marker card">
-        {{#image}}
+        <!-- {{#image}}
           <div class="card-image is-centered">
             <figure class="image">
               <img src="{{image}}" alt="{{imagealt}}">
             </figure>
-          </div>
-        {{/image}}
+          </div> -->
+        <!-- {{/image}} -->
         <div class="card-content">
           {{#header}}
             <div class="media">
+              <div class="media-left">
+                <button id="favButton" class="material-icons" data-favorite="{{favList}}">star</button>
+              </div>
               <div class="media-content">
                 <h4 class="title is-5">{{title}}</h4>
               </div>
@@ -348,7 +334,7 @@
       <footer class="footer">
         <div class="content has-text-centered ">
           <p>
-            <strong>Corner EV</strong> by <a>Scott, Tommy, Ryan, and Sebastian</a>. The source code is licensed
+            <strong>Corner EV</strong> by <a>Scott, Tommy, Ryan, and Sebastian</a>. The Source Code Is Licensed
             <a href="LICENSE">MIT</a>
           </p>
         </div>
