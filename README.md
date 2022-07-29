@@ -106,6 +106,12 @@ Project Link: [https://github.com/Kurohyou-Studios/your-corner-ev](https://githu
 
 ## Acknowledgments
 TODO
+<a href="https://www.flaticon.com/free-icons/flash" title="flash icons">Flash icons created by Smashicons - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/biodiesel" title="biodiesel icons">Biodiesel icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/corn" title="corn icons">Corn icons created by Freepik - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/hydrogen" title="hydrogen icons">Hydrogen icons created by Smashicons - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/gas" title="gas icons">Gas icons created by Kiranshastry - Flaticon</a>
+<a href="https://www.flaticon.com/free-icons/tree" title="tree icons">Tree icons created by Freepik - Flaticon</a>
 
 This readme template adapted from the [Best-README-Template](https://github.com/othneildrew/Best-README-Template/blob/master/BLANK_README.md) by [Othneil Drew](https://github.com/othneildrew).
 <p align="right">(<a href="#top">back to top</a>)</p>
