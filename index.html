@@ -278,20 +278,7 @@
                 <h4 class="title is-5">{{title}}</h4>
               </div>
               <div class="media-right">
-                {{#headericons-material}}
-                  {{#.}}
-                    <span class="icon">
-                      <i class="material-icons">{{.}}</i>
-                    </span>
-                  {{/.}}
-                {{/headericons-material}}
-                {{#headericons-fa}}
-                  {{#.}}
-                  <span class="icon">
-                    <i class="fas {{.}}" aria-hidden="true"></i>
-                  </span>
-                  {{/.}}
-                {{/headericons-fa}}
+               <img src="{{icon}}" alt="{{iconalt}}" style="width: 40px">
               </div>
             </div>
           {{/header}}
