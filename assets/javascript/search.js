@@ -8,6 +8,7 @@ const stationMarkers = {};
 const nrelak = 'kKioVYWtLSheIYeuhhDJEcNsDNdivdWsT3R0ayO4';
 const map = {};
 const mapContainer = document.getElementById('map-container');
+//#region Helper Functions
 /**
  * Function copied from https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_debounce. Delays execution of a function until `wait` time has passed to prevent a function from being called too frequently.
  * @param {function} func - The function to call
@@ -29,6 +30,41 @@ const mapContainer = document.getElementById('map-container');
     }
   };
 };
+
+/**
+ * Rounds the provided number to two decimal places
+ * @param {number} num - The number to convert
+ * @returns {number} - Number rounded to 2 decimal places
+ */
+const twoDecimals = (num)=>{
+  return Math.round(num * 100) / 100;
+}
+
+/**
+ * Clones the contents of the indicated template.
+ * @param {string} id - The template ID to get
+ * @param {string|number|jQuery Object} [toAppend] - Content to append to the cloned template
+ * @returns {jQuery Object}
+ */
+const getTemplate = (id,keys={})=>{
+  //Get the template item
+  const $template = $(`#${id}`);
+  //Extract the html code for the template as text.
+  const templateText = $('<div></div>').text($template.html()).text();
+  //Render the template as html using the provided keys and the Mustache library
+  return $(Mustache.render(templateText,keys));
+}
+
+//Validate that there are enough characters to search with
+const validInput = () => {
+  const text = $searchInput.val();
+  return text.length >= 3 ?
+    text :
+    false;
+};
+//#endregion Helper Functions
+
+//#region HTML Manipulation
 /**
  * Removes a location option from the search datalist as well as from the object of possible user locations.
  * @param {JQUERYCollection} $opt - The Jquery collection/element to work on
@@ -51,21 +87,6 @@ const setSearchState = (bulmaState,$element = $searchInput) => {
 }
 
 /**
- * Clones the contents of the indicated template.
- * @param {string} id - The template ID to get
- * @param {string|number|jQuery Object} [toAppend] - Content to append to the cloned template
- * @returns {jQuery Object}
- */
-const getTemplate = (id,keys={})=>{
-  //Get the template item
-  const $template = $(`#${id}`);
-  //Extract the html code for the template as text.
-  const templateText = $('<div></div>').text($template.html()).text();
-  //Render the template as html using the provided keys and the Mustache library
-  return $(Mustache.render(templateText,keys));
-}
-
-/**
  * Loads the rest of the form once a valid location has been selected
  */
 const loadFinalForm = () => {
@@ -76,32 +97,9 @@ const loadFinalForm = () => {
   }
 };
 
-//Validate that there are enough characters to search with
-const validInput = () => {
-  const text = $searchInput.val();
-  return text.length >= 3 ?
-    text :
-    false;
-};
-//#region station searching
-
-/**
- * Initiates a fetch request to NREL to look for nearby stations.
- * @param {object} parameters - The query parameters to send in the API fetch call
- * @returns {Promise} - Resolves to the json parsed data on nearby stations from NREL
- */
-const getNearestStations = function(parameters={}){
-  const paramString = Object.entries(parameters).map(([key,val])=>`${key}=${val}`).join('&');
-  return fetch(`https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=${nrelak}&${paramString}`)
-    .then(response => response.json());
-}
-
-const twoDecimals = (num)=>{
-  return Math.round(num * 100) / 100;
-}
-
 /**
  * Creates the map and adds markers for each station to it
+ * TODO: Add fuel type icons/custom markers to the map instead of the default HERE markers.
  * @param {object} selectedLocation - Object holding the latitude/longitude of the user's location
  * @param {object} stations - The stations that were found within the search area
  */
@@ -122,6 +120,7 @@ const createMap = (selectedLocation,stations) => {
   map.group = new H.map.Group();
   console.log(stations);
   stations.forEach((station) => {
+    //The data to store on the marker. This data is used by createPopup() to use the Mustache Renderer to create the card for a given marker.
     const data = {
       header:{
         title:station.station_name,
@@ -181,6 +180,20 @@ const createPopup = (event)=>{
   });
   map.ui.addBubble(bubble);
 };
+//#endregion HTML Manipulation
+
+//#region station searching
+
+/**
+ * Initiates a fetch request to NREL to look for nearby stations.
+ * @param {object} parameters - The query parameters to send in the API fetch call
+ * @returns {Promise} - Resolves to the json parsed data on nearby stations from NREL
+ */
+const getNearestStations = function(parameters={}){
+  const paramString = Object.entries(parameters).map(([key,val])=>`${key}=${val}`).join('&');
+  return fetch(`https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json?api_key=${nrelak}&${paramString}`)
+    .then(response => response.json());
+}
 
 /**
  * Collects the user's input to query NREL for nearby stations. Calls `createMap()` to create the map.
@@ -208,7 +221,6 @@ const findStations = async () => {
 //#endregion
 
 //#region Listener Functions
-//#region City searching
 /**
  * Gets the user's current location using HTML 5 geolocationAPI
  */
@@ -291,10 +303,9 @@ const searchCities = async ()=>{
 //Debounce the search function to prevent excessive API calls
 const debouncedSearch = debounce(searchCities,250);
 
-//#endregion City searching
-
 /**
  * Invoked when the user submits the search form. Checks all inputs to make sure that a valid option has been selected, or valid entry made.
+ * TODO: Add verification of connector type input
  * @param {EventObject} event - The event that triggered the function
  */
 const verifySelections = (event)=>{
@@ -331,6 +342,7 @@ const verifySelections = (event)=>{
 
 /**
  * Shows/hides the fuel type specific search options based on what fuel type is selected.
+ * TODO: Prevent duplicate fuel specific items from being created when they already exist on the page
  * @param {DOMEvent} event - The event that triggered the function
  */
 const fuelSpecificOptions = (event) => {
@@ -350,8 +362,10 @@ $form.submit(verifySelections);
 $searchInput.on('input',debouncedSearch);
 $searchInput.change(debouncedSearch);
 window.addEventListener('resize',()=>{
+  //If a map has been created, resize it when the viewport is resized.
   if(map.map){
     map.map.getViewPort().resize();
   }
-})
+});
+//TODO: Add storage of favorite stations
 //#endregion
