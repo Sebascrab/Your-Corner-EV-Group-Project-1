@@ -9,6 +9,15 @@ const nrelak = 'kKioVYWtLSheIYeuhhDJEcNsDNdivdWsT3R0ayO4';
 const map = {};
 const mapContainer = document.getElementById('map-container');
 var localStorageData = JSON.parse(localStorage.getItem('FavoriteStations'))||[];
+var fuelIcon = {
+  BD:"../images/biodiesel.png",
+  cng:"../images/cng.png",
+  ELEC:"https://github.com/Kurohyou-Studios/your-corner-ev/blob/main/assets/images/elec.png?raw=true",
+  E85:"https://github.com/Kurohyou-Studios/your-corner-ev/blob/main/assets/images/E85.png?raw=true",
+  HY:"../images/hydrogen.png",
+  LNG:"../images/cng.png",
+  LPG:"../images/propane.png"
+};
 //#region Helper Functions
 /**
  * Function copied from https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore#_debounce. Delays execution of a function until `wait` time has passed to prevent a function from being called too frequently.
@@ -126,6 +135,8 @@ const createMap = (selectedLocation,stations) => {
       favList: station.id,
       header:{
         title:station.station_name,
+        icon:fuelIcon[station.fuel_type_code],
+        iconalt:station.fuel_type_code
       },
       content:{
         address:{
@@ -149,7 +160,8 @@ const createMap = (selectedLocation,stations) => {
       }
       return memo;
     },{})
-    const marker = new H.map.Marker({lat:station.latitude,lng:station.longitude},{data});
+    var icon = new H.map.Icon(fuelIcon[station.fuel_type_code]);
+    const marker = new H.map.Marker({lat:station.latitude,lng:station.longitude},{data, icon});
     stationMarkers[station.station_name] = marker;
     map.group.addObject(marker);
   });
