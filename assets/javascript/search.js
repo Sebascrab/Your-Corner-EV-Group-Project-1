@@ -10,13 +10,13 @@ const map = {};
 const mapContainer = document.getElementById('map-container');
 var localStorageData = JSON.parse(localStorage.getItem('FavoriteStations'))||[];
 var fuelIcon = {
-  BD:"../images/biodiesel.png",
-  cng:"../images/cng.png",
-  ELEC:"https://github.com/Kurohyou-Studios/your-corner-ev/blob/main/assets/images/elec.png?raw=true",
-  E85:"https://github.com/Kurohyou-Studios/your-corner-ev/blob/main/assets/images/E85.png?raw=true",
-  HY:"../images/hydrogen.png",
-  LNG:"../images/cng.png",
-  LPG:"../images/propane.png"
+  BD:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/biodiesel.png",
+  cng:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/cng.png",
+  ELEC:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/elec.png",
+  E85:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/E85.png",
+  HY:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/hydrogen.png",
+  LNG:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/cng.png",
+  LPG:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/propane.png"
 };
 //#region Helper Functions
 /**
@@ -160,7 +160,7 @@ const createMap = (selectedLocation,stations) => {
       }
       return memo;
     },{})
-    var icon = new H.map.Icon(fuelIcon[station.fuel_type_code]);
+    var icon = new H.map.Icon(fuelIcon[station.fuel_type_code], { size: { w: 30, h: 30 } });
     const marker = new H.map.Marker({lat:station.latitude,lng:station.longitude},{data, icon});
     stationMarkers[station.station_name] = marker;
     map.group.addObject(marker);
