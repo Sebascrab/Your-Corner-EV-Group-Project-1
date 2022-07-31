@@ -5,10 +5,10 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+      <link rel="stylesheet" href="https://use.typekit.net/pxc1wjb.css">
+      <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
   type="text/javascript" charset="utf-8"></script>
     <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
   type="text/javascript" charset="utf-8"></script>
@@ -18,52 +18,33 @@
     <link rel="stylesheet" type="text/css"
         href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
     <script src="https://kit.fontawesome.com/619ebb2432.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/map.css">
+    <link type="text/css" rel="stylesheet" href="./assets/css/style.css">
   </head>
   <body>
-    <!-- Hero W/ Navbar -->
-    <section class="hero is-primary is-medium is-warning">
-      <!-- Hero head: will stick at the top -->
-      <div class="hero-head">
-        <nav class="navbar">
-          <div class="container">
-            <div class="navbar-brand">
-              <a class="navbar-item">
-                <i class="fa-solid fa-charging-station fa-xl"></i>
-              </a>
-              <a class="navbar-burger" id="burger" data-target="navbar-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-              </a>
-            </div>
-            <div class="container">
-            <div class="navbar-menu" id="nav-links">
-              <div class="navbar-end">
-                <a href='index.html' class="navbar-item">Home</a>
-                <a href='./assets/html/fueltypes.html' class="navbar-item">Charging And Fuel Information </a>
-                <a href='./assets/html/questions.html' class="navbar-item">Questions</a>
-                <a href='./assets/html/contact.html' class="navbar-item">Contact</a>
-              </div>
-            </div>
-            </div>
-          </div>
-        </nav>
-      </div>
-    
-      <!-- Hero content: will be in the middle -->
-      <section class="hero is-medium">
-      <div class="hero">
-        <div class="container has-text-centered">
-          <p class="title">
-            Welcome To Corner EV
-          </p>
+    <nav class="navbar has-shadow is-warning">
+        <!-- logo in navbar -->
+        <div class="navbar-brand">
+          <a class="navbar-item">
+            <span><img src="./assets/images/LOGOEV-SQUARE.png" alt="site logo" style="max-height: 70px" class="py-2 px-2"></span>
+            <div class="brandName">WELCOME TO YOUR CORNER EV</div>
+          </a>
+          <!-- Burger dropdown menu for smaller screens -->
+          <a class="navbar-burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </a>
         </div>
-      </div>
-    </section>
-  </section>
-
+        <div class="navbar-menu" id="nav-links">
+          <div class="navbar-end">
+            <a href='index.html' class="navbar-item">HOME</a>
+            <a href='./assets/html/fueltypes.html' class="navbar-item">CHARGING AND FUEL INFORMATION</a>
+            <a href='./assets/html/questions.html' class="navbar-item">QUESTIONS</a>
+            <a href='./assets/html/contact.html' class="navbar-item">CONTACT US</a>
+          </div>
+        </div>
+      </nav>
     <!-- Breadcrumbs -->
     <div class="section pt-4 pb-0">
       <nav class="breadcrumb has-arrow-separator">
@@ -76,16 +57,6 @@
     <!-- Product Information  -->
     <section class="section">
       <div class="container">
-        <!-- <div class="columns is-vcentered"> -->
-          <!-- <div class="column is-6-tablet is-5-desktop is-half has-text-centered">
-            <h1 class="is-size-3-mobile is-size-1-desktop title">Welcome To Corner EV</h1>
-            <h2 class="is-size-3-mobile is-size-2-desktop subtitle">Looking For A Place To Charge?</h2>
-            <p>Look no further, the Charge dEV's got your back! Corner EV is used to find EV charging stations closest to you.
-              Not only can you find your nearest charging staion, but you can also search for alternative fuel stations in your area. 
-              Planning a trip? Enter the location and make sure you'll be charged wherever you go. 
-            </p>
-          </div> -->
-
           <!-- Text Above Search -->
           <h3 class="title is-3 has-text-centered">
             Looking For A Place To Charge?
@@ -319,7 +290,7 @@
     <!-- End Bulma Templates -->
       <!-- This is the footer -->
       <footer class="footer">
-        <div class="content has-text-centered ">
+        <div class="content has-text-centered">
           <p>
             <strong>Corner EV</strong> by <a>Scott, Tommy, Ryan, and Sebastian</a>. The Source Code Is Licensed
             <a href="LICENSE">MIT</a>

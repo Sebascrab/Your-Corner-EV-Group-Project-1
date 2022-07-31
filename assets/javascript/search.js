@@ -393,5 +393,4 @@ window.addEventListener('resize',()=>{
   }
 });
 //TODO: Add storage of favorite stations
-
 //#endregion

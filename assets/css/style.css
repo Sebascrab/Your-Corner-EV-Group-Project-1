@@ -1,7 +1,21 @@
-html{
+html *{
   font-size:16px;
+  font-family: ivypresto-headline, serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+body, .footer {
+  background-color: rgb(214,207,203);
 }
 
 .brown-card {
   background-color: tan;
+}
+
+.footer {
+  font-size: 12px;
+  position:relative;
+  width: 100%;
+  bottom: 0;
 }
