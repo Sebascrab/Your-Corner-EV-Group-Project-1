@@ -5,6 +5,10 @@ html *{
   font-style: normal;
 }
 
+body {
+  background-image: linear-gradient(to bottom right, #D6CFCB, white);
+}
+
 .brown-card {
   background-color: tan;
 }
