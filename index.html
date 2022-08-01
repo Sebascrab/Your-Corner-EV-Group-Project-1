@@ -22,6 +22,8 @@
     <link type="text/css" rel="stylesheet" href="./assets/css/style.css">
   </head>
   <body>
+    <div id="pageContainer">
+    <div id="mainPage">
     <nav class="navbar has-shadow is-warning">
         <!-- logo in navbar -->
         <div class="navbar-brand">
@@ -45,6 +47,7 @@
           </div>
         </div>
       </nav>
+ 
     <!-- Breadcrumbs -->
     <div class="section pt-4 pb-0">
       <nav class="breadcrumb has-arrow-separator">
@@ -91,22 +94,13 @@
           </div>
         </div>
       </div>
+    </div>
       <!-- Favorites Cards -->
       <div id="savedFavStations">
 
       </div>
     </section>
-    <!-- Footer And Slogan -->
-    <section class="section">
-      <div class="container">
-        <div class="columns is-8 is variable">
-          <div class="column is-6-tablet">
-            <p><strong><i>Cool People Charge. Stay Cool, And Stay Charged. - Charge dEV's</i></strong></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
+   
     <!-- Templates for use by JS -->
     <template id="bulma-field">
       <div class="field"></div>
@@ -288,15 +282,25 @@
       </div>
     </template>
     <!-- End Bulma Templates -->
+     <!-- Slogan -->
+     <section class="slogan">
+      <div class="container">
+        <div class="columns is-8 is-variable is-centered">
+          <div class="column is-6-tablet is-centered">
+            <p class="is-centered has-text-centered"><strong><i>Cool People Charge. Stay Cool, And Stay Charged. - Charge dEV's</i></strong></p>
+          </div>
+        </div>
+      </div>
+    </section>
       <!-- This is the footer -->
-      <footer class="footer">
-        <div class="content has-text-centered">
+      <footer class="mt-auto" id="footer">
+        <div class="content has-text-centered is-centered is-variable">
           <p>
             <strong>Corner EV</strong> by <a>Scott, Tommy, Ryan, and Sebastian</a>. The Source Code Is Licensed
             <a href="LICENSE">MIT</a>
           </p>
-        </div>
-      </footer>
+        </footer>
+      </div>
     <!-- JS scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"
         integrity="sha512-HYiNpwSxYuji84SQbCU5m9kHEsRqwWypXgJMBtbRSumlx1iBB6QaxgEBZHSHEGM+fKyCX/3Kb5V5jeVXm0OglQ=="
@@ -310,6 +314,9 @@
     <script src="assets/javascript/script.js"></script>
     <!-- Search code -->
     <script src="assets/javascript/search.js"></script>
+</div>
+</div>
+</div>
   </body>
 </html>
 
