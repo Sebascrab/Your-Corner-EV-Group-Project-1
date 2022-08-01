@@ -1,6 +1,11 @@
+
 html *{
   font-size:16px;
-  font-family: ivypresto-headline, serif;
+  /* font-family: ivypresto-headline, serif; */
+  font-family: obviously, sans-serif;
+  /* font-family: servus-slab, serif; */
+  /* font-family: museo-slab, serif; */
+  /* font-family: new-frank, sans-serif; */
   font-weight: 400;
   font-style: normal;
 }
@@ -11,15 +16,38 @@ body, .footer {
   background-color: rgb(214,207,203);
 }
 
+.upperText {
+  line-height: 2;
+}
+
+.slogan, section, .container {
+  background-color: rgb(214,207,203);
+}
+
+.pageContainer {
+  min-height: 100%;
+  background-color: rgb(214,207,203) !important;
+}
+
+.mainPage {
+  overflow: auto;
+  height: 100%;
+}
+
 .brown-card {
   background-color: tan;
 }
 
-.footer {
+footer {
   font-size: 12px;
-  z-index:100;
-  inset:auto 0 0 0;
-  position:fixed;
-  padding:1.5rem;
-  box-shadow: rgba(0, 0, 0, 0.19) 10px 0px 20px, rgba(0, 0, 0, 0.23) 6px 0px 6px;
+  margin: 0;
+  position: relative;
+  height: 100px;
+  clear:both;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  z-index: 1;
+  width: 100%;
+  bottom: 0;
+  background-color: rgb(214,207,203);
 }
