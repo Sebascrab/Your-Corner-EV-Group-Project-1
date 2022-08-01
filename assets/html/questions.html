@@ -17,11 +17,14 @@
     <script src="https://kit.fontawesome.com/619ebb2432.js" crossorigin="anonymous"></script>
   </head>
   <body>
+    <div class="pageContainer">
+      <div class="mainPage">
     <nav class="navbar has-shadow is-warning">
       <!-- logo in navbar -->
       <div class="navbar-brand">
         <a class="navbar-item">
           <img src="../images/LOGOEV-SQUARE.png" alt="site logo" style="max-height: 70px" class="py-2 px-2"> 
+          <div class="brandName">YOUR CORNER EV</div> 
         </a>
         <!-- Burger dropdown menu for smaller screens -->
         <a class="navbar-burger" id="burger">
@@ -32,10 +35,10 @@
       </div>
       <div class="navbar-menu" id="nav-links">
         <div class="navbar-end">
-          <a href='../../index.html' class="navbar-item">Home</a>
-          <a href='./fueltypes.html' class="navbar-item">Charging And Fuel Information </a>
-          <a href='./questions.html' class="navbar-item">Questions</a>
-          <a href='./contact.html' class="navbar-item">Contact</a>
+          <a href='../../index.html' class="navbar-item">HOME</a>
+          <a href='./fueltypes.html' class="navbar-item">CHARGING AND FUEL INFORMATION</a>
+          <a href='./questions.html' class="navbar-item">QUESTIONS</a>
+          <a href='./contact.html' class="navbar-item">CONTACT US</a>
         </div>
       </div>
     </nav>
@@ -82,19 +85,25 @@
             </div>
         </div>
     </section>
-    <footer class="footer">
-        <div class="content has-text-centered ">
-          <p>
-            <strong>Corner EV</strong> by <a>Scott, Tommy, Ryan, and Sebastian</a>. The source code is licensed
-            <a href="LICENSE">MIT</a>
-          </p>
-        </div>
-      </footer>
-
-      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-      <!-- Initialize HERE API -->
-      <script src="../javascript/script.js">
-      </script>
+    
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Initialize HERE API -->
+    <script src="../javascript/script.js">
+    </script>
       <script src="../javascript/script.js"></script>
       <!-- Search code -->
       <script src="../javascript/script.js"></script>
+    </div>
+  </div>
+  <!-- This is the footer -->
+  <footer class="has-text-centered is-centered is-variable">
+    <div class="container" id="footerText">
+      <p>Cool People Charge. Stay Cool, And Stay Charged. - Charge dEV's</p>
+      <p>
+        <strong>Corner EV</strong> by <a>Scott, Tommy, Ryan, and Sebastian</a>. The Source Code Is Licensed
+        <a href="LICENSE">MIT</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
