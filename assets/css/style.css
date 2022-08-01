@@ -1,38 +1,47 @@
 
 html *{
   font-size:16px;
-  font-family: ivypresto-headline, serif;
+  /* font-family: ivypresto-headline, serif; */
+  font-family: obviously, sans-serif;
+  /* font-family: servus-slab, serif; */
+  /* font-family: museo-slab, serif; */
+  /* font-family: new-frank, sans-serif; */
   font-weight: 400;
   font-style: normal;
 }
 
-body {
-  background-color: rgb(214,207,203);
+body{
+  background-color: rgb(214,207,203) !important;
   height: 100vh;
 }
-.slogan {
+
+.upperText {
+  line-height: 2;
+}
+
+.slogan, section, .container {
   background-color: rgb(214,207,203);
 }
 
-#pageContainer {
+.pageContainer {
   min-height: 100%;
+  background-color: rgb(214,207,203) !important;
 }
 
-#mainPage {
+.mainPage {
   overflow: auto;
-  padding-bottom: 100px;
+  height: 100%;
 }
 
 .brown-card {
   background-color: tan;
 }
 
-#footer {
+footer {
   font-size: 12px;
   margin: 0;
   position: relative;
   height: 100px;
-  margin-top: -30px;
   clear:both;
   padding-top: 40px;
   padding-bottom: 40px;

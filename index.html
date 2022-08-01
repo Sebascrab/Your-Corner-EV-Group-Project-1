@@ -1,35 +1,34 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Your Corner EV</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-      <link rel="stylesheet" href="https://use.typekit.net/pxc1wjb.css">
-      <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js"
-  type="text/javascript" charset="utf-8"></script>
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js"
-  type="text/javascript" charset="utf-8"></script>
-    <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"
-        type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-    <link rel="stylesheet" type="text/css"
-        href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
-    <script src="https://kit.fontawesome.com/619ebb2432.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./assets/css/map.css">
-    <link type="text/css" rel="stylesheet" href="./assets/css/style.css">
-  </head>
-  <body>
-    <div id="pageContainer">
-    <div id="mainPage">
-    <nav class="navbar has-shadow is-warning">
+
+<head>
+  <title>Your Corner EV</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://use.typekit.net/pxc1wjb.css">
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+  <script src="https://js.api.here.com/v3/3.1/mapsjs-ui.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+  <script src="https://kit.fontawesome.com/619ebb2432.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./assets/css/map.css">
+  <link type="text/css" rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+  <div class="pageContainer">
+    <div class="mainPage">
+      <nav class="navbar has-shadow is-warning">
         <!-- logo in navbar -->
         <div class="navbar-brand">
           <a class="navbar-item">
-            <span><img src="./assets/images/LOGOEV-SQUARE.png" alt="site logo" style="max-height: 70px" class="py-2 px-2"></span>
-            <div class="brandName">WELCOME TO YOUR CORNER EV</div>
+            <span><img src="./assets/images/LOGOEV-SQUARE.png" alt="site logo" style="max-height: 70px"
+                class="py-2 px-2"></span>
+            <div class="brandName">YOUR CORNER EV</div>
           </a>
           <!-- Burger dropdown menu for smaller screens -->
           <a class="navbar-burger" id="burger">
@@ -47,35 +46,39 @@
           </div>
         </div>
       </nav>
- 
-    <!-- Breadcrumbs -->
-    <div class="section pt-4 pb-0">
-      <nav class="breadcrumb has-arrow-separator">
-        <ul class="container is-size-6">
-          <li><a class="has-text-grey">Home</a></li>
-          <li class="is-active"><a>EV Finder</a></li>
-        </ul>
-      </nav>
-    </div>
-    <!-- Product Information  -->
-    <section class="section">
-      <div class="container">
+
+      <!-- Breadcrumbs -->
+      <div class="section pt-4 pb-0">
+        <nav class="breadcrumb has-arrow-separator">
+          <ul class="container is-size-6">
+            <li><a class="has-text-grey">Home</a></li>
+            <li class="is-active"><a>EV Finder</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Product Information  -->
+      <section class="section">
+        <div class="container">
           <!-- Text Above Search -->
           <h3 class="title is-3 has-text-centered">
             Looking For A Place To Charge?
           </h3><br>
-          <h5 class="subtitle is-5">
-            Look no further, the Charge dEV's got your back! Corner EV is used to find EV charging stations closest to you.
-            Not only can you find your nearest charging staion, but you can also search for alternative fuel stations in your area. 
-            Planning a trip? Enter the location and make sure you'll be charged wherever you go. 
+          <h5 class="upperText subtitle is-5">
+            Look No Further!
+            <br>Simply Enter Your Address Or Let Us Find Your Location For You And We Will Provide The Stations Nearest
+            You.
+            <br>Looking For Something Other Than Electric? We Have That Too! Your Corner EV Can Provide You Alternative
+            Fuel Locations As Well.
+            <br>After Providing Your Location, Select Your Distance And Fuel Type And Let The Magic Happen.
           </h5>
-          
           <!-- Search And Location Button -->
-          <div class="column is-6-tablet is-8-desktop is-half has-text-centered">
+          <div class="columns">
+          <div class="column is-two-thirds has-text-centered">
             <form>
               <div class="field has-addons">
                 <div class="control is-expanded has-icons-left">
-                  <input type="search" name="location" id="location" class="input" placeholder="Location In The USA" list="possible-locations">
+                  <input type="search" name="location" id="location" class="input" placeholder="Location In The USA"
+                    list="possible-locations">
                   <datalist id="possible-locations"></datalist>
                   <span class="icon is-left">
                     <i class="material-icons">place</i>
@@ -90,151 +93,171 @@
               </div>
             </form>
             <ul id="foundNames"></ul>
-            <div style="width:100%;aspect-ratio:1 / 1" id="map-container"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-      <!-- Favorites Cards -->
-      <div id="savedFavStations">
-
-      </div>
-    </section>
-   
-    <!-- Templates for use by JS -->
-    <template id="bulma-field">
-      <div class="field"></div>
-    </template>
-    <template id="bulma-label">
-      <label class="label"></label>
-    </template>
-    <template id="bulma-control">
-      <div class="control"></div>
-    </template>
-    <template id="final-form">
-      <div>
-        <div class="field is-grouped" id="advanced-options">
-          <div class="control field">
-            <label for="search-radius" class="label">Distance</label>
-            <div class="control has-icons-right">
-              <input type="number" name="search-radius" id="search-radius" class="input" value="10">
-              <span class="icon is-right">
-                <span>mi</span>
-              </span>
+            <div style="width:67%;aspect-ratio:1 / 1" id="map-container">
             </div>
           </div>
-          <div class="control field">
-            <label for="fuel-type" class="label">Fuel Type</label>
-            <div class="control has-icons-left">
-              <div class="select is-fullwidth">
-                <select name="fuel-type" id="fuel-type">
-                  <option value="">Select A Fuel Type</option>
-                  <option value="all">All</option>
-                  <option value="BD">Biodiesel (B20 And Above)</option>
-                  <option value="cng">Compressed Natural Gas (CNG)</option>
-                  <option value="ELEC">Electric</option>
-                  <option value="E85">Ethanol (E85)</option>
-                  <option value="HY">Hydrogen</option>
-                  <option value="LNG">Liquefied Natural Gas (LNG)</option>
-                  <option value="LPG">Propane (LPG)</option>
-                </select>
+          <!-- Favorite Stations List -->
+          <div class="column is-one-third is-pulled-right" id="savedFavoriteStations">
+            <div class="card">
+              <header class="card-header has-background-warning">
+                <p class="card-header-title">
+                  Favorite Stations
+                </p>
+                <button class="card-header-icon" aria-label="more options">
+                  <span class="icon">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                  </span>
+                </button>
+              </header>
+              <div class="card-content">
+                <div class="content">
+                  Here Is Where We Will Add Favorited Stations
+                </div>
               </div>
-              <span class="icon is-left">
-                <i class="material-icons">bolt</i>
-              </span>
+              <div class="card-footer">
+                <a href="#" class="card-footer-item">Save</a>
+                <a href="#" class="card-footer-item">Edit</a>
+                <a href="#" class="card-footer-item">Delete</a>
+              </div>
+            </div>
             </div>
           </div>
-        </div>
-        <div class="field is-grouped is-grouped-centered" id="submit-container">
-          <div class="control">
-            <button type="submit" class="button is-primary">Find Your Corner EV</button>
-          </div>
-        </div>
       </div>
-    </template>
-    <template id="elec-options">
-      <div class="field is-grouped" id="electric-options">
-        <div class="control field">
-          <label for="pay-network" class="label">EV Network</label>
-          <div class="control has-icons-left">
-            <div class="select">
-              <select name="ev-network" id="ev-network" class="select">
-                <option value="all" selected>All</option>
-                <option value="AddÉnergie Technologies">AddÉnergie</option>
-                <option value="AMPUP">AmpUp</option>
-                <option value="BCHYDRO">BC Hydro</option>
-                <option value="Blink Network">Blink</option>
-                <option value="CHARGELAB">ChargeLab</option>
-                <option value="ChargePoint Network">ChargePoint</option>
-                <option value="Circuit électrique">Circuit électrique</option>
-                <option value="eCharge Network">eCharge Network</option>
-                <option value="Electrify America">Electrify America</option>
-                <option value="Electrify Canada">Electrify Canada</option>
-                <option value="EVCS">EV Charging Solutions</option>
-                <option value="EV Connect">EV Connect</option>
-                <option value="EVGATEWAY">evGateway</option>
-                <option value="eVgo Network">EVgo</option>
-                <option value="FLO">FLO</option>
-                <option value="FPLEV">FPL EVolution</option>
-                <option value="FCN">Francis</option>
-                <option value="Greenlots">Greenlots</option>
-                <option value="IVY">Ivy</option>
-                <option value="LIVINGSTON">Livingston Energy Group</option>
-                <option value="Non-Networked">Non-Networked</option>
-                <option value="OpConnect">OpConnect</option>
-                <option value="PETROCAN">Petro-Canada</option>
-                <option value="POWERFLEX">PowerFlex</option>
-                <option value="RIVIAN_ADVENTURE">Rivian Adventure Network</option>
-                <option value="RIVIAN_WAYPOINTS">Rivian Waypoints</option>
-                <option value="SemaCharge Network">SemaConnect</option>
-                <option value="Sun Country Highway">Sun Country Highway</option>
-                <option value="SWTCH">Swtch Energy</option>
-                <option value="Tesla Destination">Tesla Destination</option>
-                <option value="Tesla">Tesla Supercharger</option>
-                <option value="Volta">Volta</option>
-                <option value="Webasto">Webasto</option>
-                <option value="ZEFNET">ZEF Network</option>
-              </select>
+        <!-- Templates for use by JS -->
+        <template id="bulma-field">
+          <div class="field"></div>
+        </template>
+        <template id="bulma-label">
+          <label class="label"></label>
+        </template>
+        <template id="bulma-control">
+          <div class="control"></div>
+        </template>
+        <template id="final-form">
+          <div>
+            <div class="field is-grouped" id="advanced-options">
+              <div class="control field">
+                <label for="search-radius" class="label">Distance</label>
+                <div class="control has-icons-right">
+                  <input type="number" name="search-radius" id="search-radius" class="input" value="10">
+                  <span class="icon is-right">
+                    <span>mi</span>
+                  </span>
+                </div>
+              </div>
+              <div class="control field">
+                <label for="fuel-type" class="label">Fuel Type</label>
+                <div class="control has-icons-left">
+                  <div class="select is-fullwidth">
+                    <select name="fuel-type" id="fuel-type">
+                      <option value="">Select A Fuel Type</option>
+                      <option value="all">All</option>
+                      <option value="BD">Biodiesel (B20 And Above)</option>
+                      <option value="cng">Compressed Natural Gas (CNG)</option>
+                      <option value="ELEC">Electric</option>
+                      <option value="E85">Ethanol (E85)</option>
+                      <option value="HY">Hydrogen</option>
+                      <option value="LNG">Liquefied Natural Gas (LNG)</option>
+                      <option value="LPG">Propane (LPG)</option>
+                    </select>
+                  </div>
+                  <span class="icon is-left">
+                    <i class="material-icons">bolt</i>
+                  </span>
+                </div>
+              </div>
             </div>
-            <span class="icon is-left">
-              <i class="material-icons">payment</i>
-            </span>
-          </div>
-        </div>
-        <div class="control field">
-          <label for="ev-charger" class="label">EV Connector</label>
-          <div class="control has-icons-left">
-            <div class="select">
-              <select name="ev-charger" id="ev-charger">
-                <option value="all">All</option>
-                <option value="NEMA1450" selected>NEMA 14-50</option>
-                <option value="NEMA515">NEMA 5-15</option>
-                <option value="NEMA520">NEMA 5-20</option>
-                <option value="J1772">J1772</option>
-                <option value="J1772COMBO">J1772COMBO</option>
-                <option value="CHADEMO">CHAdeMO</option>
-                <option value="TESLA">Tesla</option>
-              </select>
-              <span class="icon is-left">
-                <i class="material-icons">outlet</i>
-              </span>
+            <div class="field is-grouped is-grouped-centered pt-3 pb-5" id="submit-container">
+              <div class="control">
+                <button type="submit" class="button is-primary">Find Your Corner EV</button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </template>
-    <!-- Bulma Template - HTML -->
-    <template id="marker-content">
-      <div class="marker card">
-        <!-- {{#image}}
+        </template>
+        <template id="elec-options">
+          <div class="field is-grouped" id="electric-options">
+            <div class="control field">
+              <label for="pay-network" class="label">EV Network</label>
+              <div class="control has-icons-left">
+                <div class="select">
+                  <select name="ev-network" id="ev-network" class="select">
+                    <option value="all" selected>All</option>
+                    <option value="AddÉnergie Technologies">AddÉnergie</option>
+                    <option value="AMPUP">AmpUp</option>
+                    <option value="BCHYDRO">BC Hydro</option>
+                    <option value="Blink Network">Blink</option>
+                    <option value="CHARGELAB">ChargeLab</option>
+                    <option value="ChargePoint Network">ChargePoint</option>
+                    <option value="Circuit électrique">Circuit électrique</option>
+                    <option value="eCharge Network">eCharge Network</option>
+                    <option value="Electrify America">Electrify America</option>
+                    <option value="Electrify Canada">Electrify Canada</option>
+                    <option value="EVCS">EV Charging Solutions</option>
+                    <option value="EV Connect">EV Connect</option>
+                    <option value="EVGATEWAY">evGateway</option>
+                    <option value="eVgo Network">EVgo</option>
+                    <option value="FLO">FLO</option>
+                    <option value="FPLEV">FPL EVolution</option>
+                    <option value="FCN">Francis</option>
+                    <option value="Greenlots">Greenlots</option>
+                    <option value="IVY">Ivy</option>
+                    <option value="LIVINGSTON">Livingston Energy Group</option>
+                    <option value="Non-Networked">Non-Networked</option>
+                    <option value="OpConnect">OpConnect</option>
+                    <option value="PETROCAN">Petro-Canada</option>
+                    <option value="POWERFLEX">PowerFlex</option>
+                    <option value="RIVIAN_ADVENTURE">Rivian Adventure Network</option>
+                    <option value="RIVIAN_WAYPOINTS">Rivian Waypoints</option>
+                    <option value="SemaCharge Network">SemaConnect</option>
+                    <option value="Sun Country Highway">Sun Country Highway</option>
+                    <option value="SWTCH">Swtch Energy</option>
+                    <option value="Tesla Destination">Tesla Destination</option>
+                    <option value="Tesla">Tesla Supercharger</option>
+                    <option value="Volta">Volta</option>
+                    <option value="Webasto">Webasto</option>
+                    <option value="ZEFNET">ZEF Network</option>
+                  </select>
+                </div>
+                <span class="icon is-left">
+                  <i class="material-icons">payment</i>
+                </span>
+              </div>
+            </div>
+            <div class="control field">
+              <label for="ev-charger" class="label">EV Connector</label>
+              <div class="control has-icons-left">
+                <div class="select">
+                  <select name="ev-charger" id="ev-charger">
+                    <option value="all">All</option>
+                    <option value="NEMA1450" selected>NEMA 14-50</option>
+                    <option value="NEMA515">NEMA 5-15</option>
+                    <option value="NEMA520">NEMA 5-20</option>
+                    <option value="J1772">J1772</option>
+                    <option value="J1772COMBO">J1772COMBO</option>
+                    <option value="CHADEMO">CHAdeMO</option>
+                    <option value="TESLA">Tesla</option>
+                  </select>
+                  <span class="icon is-left">
+                    <i class="material-icons">outlet</i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </section>
+      <!-- Bulma Template - HTML -->
+      <template id="marker-content">
+        <div class="marker card">
+          <!-- {{#image}}
           <div class="card-image is-centered">
             <figure class="image">
               <img src="{{image}}" alt="{{imagealt}}">
             </figure>
           </div> -->
-        <!-- {{/image}} -->
-        <div class="card-content">
-          {{#header}}
+          <!-- {{/image}} -->
+          <div class="card-content">
+            {{#header}}
             <div class="media">
               <div class="media-left">
                 <button id="favButton" class="material-icons" data-favorite="{{favList}}">star</button>
@@ -243,80 +266,76 @@
                 <h4 class="title is-5">{{title}}</h4>
               </div>
               <div class="media-right">
-               <img src="{{icon}}" alt="{{iconalt}}" style="width: 40px">
+                <img src="{{icon}}" alt="{{iconalt}}" style="width: 40px">
               </div>
             </div>
-          {{/header}}
-          {{#content}}
+            {{/header}}
+            {{#content}}
             <div class="content">
               {{#address}}
-                <p>{{street}}</p>
-                <p>{{city}}, {{state}} {{zip}}</p>
+              <p>{{street}}</p>
+              <p>{{city}}, {{state}} {{zip}}</p>
               {{/address}}
               <div class="station-info">
                 {{#phone}}
-                  <h5>phone:</h5><span>{{phone}}</span>
+                <h5>phone:</h5><span>{{phone}}</span>
                 {{/phone}}
                 {{#hours}}
-                  <h5>hours:</h5><span>{{hours}}</span>
+                <h5>hours:</h5><span>{{hours}}</span>
                 {{/hours}}
                 {{#evNetwork}}
-                  <h5>EV Network:</h5><span>{{evNetwork}}</span>
+                <h5>EV Network:</h5><span>{{evNetwork}}</span>
                 {{/evNetwork}}
                 {{#level1}}
-                  <h5>level 1 ports:</h5><span>{{level1}}</span>
+                <h5>level 1 ports:</h5><span>{{level1}}</span>
                 {{/level1}}
                 {{#level2}}
-                  <h5>level 2 ports:</h5><span>{{level2}}</span>
+                <h5>level 2 ports:</h5><span>{{level2}}</span>
                 {{/level2}}
                 {{#DCFast}}
-                  <h5>DC fast ports:</h5><span>{{DCFast}}</span>
+                <h5>DC fast ports:</h5><span>{{DCFast}}</span>
                 {{/DCFast}}
                 {{#other}}
-                  <h5>other ports:</h5><span>{{other}}</span>
+                <h5>other ports:</h5><span>{{other}}</span>
                 {{/other}}
               </div>
             </div>
-          {{/content}}
-        </div>
-      </div>
-    </template>
-    <!-- End Bulma Templates -->
-     <!-- Slogan -->
-     <section class="slogan">
-      <div class="container">
-        <div class="columns is-8 is-variable is-centered">
-          <div class="column is-6-tablet is-centered">
-            <p class="is-centered has-text-centered"><strong><i>Cool People Charge. Stay Cool, And Stay Charged. - Charge dEV's</i></strong></p>
+            {{/content}}
           </div>
         </div>
-      </div>
-    </section>
-      <!-- This is the footer -->
-      <footer class="mt-auto" id="footer">
-        <div class="content has-text-centered is-centered is-variable">
-          <p>
-            <strong>Corner EV</strong> by <a>Scott, Tommy, Ryan, and Sebastian</a>. The Source Code Is Licensed
-            <a href="LICENSE">MIT</a>
-          </p>
-        </footer>
-      </div>
-    <!-- JS scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"
-        integrity="sha512-HYiNpwSxYuji84SQbCU5m9kHEsRqwWypXgJMBtbRSumlx1iBB6QaxgEBZHSHEGM+fKyCX/3Kb5V5jeVXm0OglQ=="
-        crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script type="text/worker">
-    </script>
-    <!-- Initialize HERE API -->
-    <script src="assets/javascript/here-ini.js">
-    </script>
-    <script src="assets/javascript/script.js"></script>
-    <!-- Search code -->
-    <script src="assets/javascript/search.js"></script>
-</div>
-</div>
-</div>
-  </body>
-</html>
+      </template>
+      <!-- End Bulma Templates -->
+    </div>
+  </div>
+  <!-- JS scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.1.0/mustache.min.js"
+    integrity="sha512-HYiNpwSxYuji84SQbCU5m9kHEsRqwWypXgJMBtbRSumlx1iBB6QaxgEBZHSHEGM+fKyCX/3Kb5V5jeVXm0OglQ=="
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script type="text/worker">
+        </script>
+  <!-- Initialize HERE API -->
+  <script src="assets/javascript/here-ini.js">
+  </script>
+  <script src="assets/javascript/script.js"></script>
+  <!-- Search code -->
+  <script src="assets/javascript/search.js"></script>
+  </div>
+  </div>
+  </div>
+  <!-- TODO: Mobile View Has White Block On Bottom -->
+  <!-- This is the footer -->
+  <footer class="has-text-centered is-centered is-variable">
+    <div class="container" id="footerText">
+      <p>Cool People Charge. Stay Cool, And Stay Charged. - Charge dEV's</p>
+      <p>
+        <strong>Corner EV</strong> by <a>Scott, Tommy, Ryan, and Sebastian</a>. The Source Code Is Licensed
+        <a href="LICENSE">MIT</a>
+      </p>
+    </div>
+  </footer>
+</body>
 
+</html>
