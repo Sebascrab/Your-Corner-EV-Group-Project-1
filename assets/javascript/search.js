@@ -10,13 +10,12 @@ const map = {};
 const mapContainer = document.getElementById('map-container');
 var localStorageData = JSON.parse(localStorage.getItem('FavoriteStations'))||[];
 var fuelIcon = {
-  BD:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/biodiesel.png",
-  cng:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/cng.png",
-  ELEC:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/elec.png",
-  E85:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/E85.png",
-  HY:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/hydrogen.png",
-  LNG:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/cng.png",
-  LPG:"https://cdn.jsdelivr.net/gh/Kurohyou-Studios/your-corner-ev/assets/images/propane.png"
+  BD:"./assets/images/cng.png",
+  ELEC:"./assets/images/elec.png",
+  E85:"./assets/images/E85.png",
+  HY:"./assets/images/hydrogen.png",
+  LNG:"./assets/images/cng.png",
+  LPG:"./assets/images/propane.png"
 };
 //#region Helper Functions
 /**
@@ -25,7 +24,7 @@ var fuelIcon = {
  * @param {number} wait - Time to wait before calling in ms
  * @param {boolean} [leading = true] - Whether to fire immediately or not
  */
-  function debounce(func, wait, immediate) {
+function debounce(func, wait, immediate) {
   var timeout;
   return function() {
     clearTimeout(timeout);
@@ -104,16 +103,30 @@ const loadFinalForm = () => {
   if(!document.getElementById('advanced-options')){
     getTemplate('final-form').appendTo($form);
     $('#fuel-type').change(fuelSpecificOptions);
+    fuelSpecificOptions({target:$('#fuel-type')[0]});
+  }
+};
+
+/**
+ * Switches the mouse cursor style from standard to pointer when hovering over markers (and back again when you stop hovering over them).
+ * Code from stackoverflow: https://stackoverflow.com/a/49516691
+ * @param {EventObject} event - The event that fired the function
+ */
+const markerPointerStyle = (event) => {
+  if (event.target instanceof H.map.Marker) {
+    map.map.getViewPort().element.style.cursor = 'pointer';
+  } else {
+    map.map.getViewPort().element.style.cursor = 'auto';
   }
 };
 
 /**
  * Creates the map and adds markers for each station to it
- * TODO: Add fuel type icons/custom markers to the map instead of the default HERE markers.
+ * TODO: Modify icons to be circular with point out the bottom.
  * @param {object} selectedLocation - Object holding the latitude/longitude of the user's location
  * @param {object} stations - The stations that were found within the search area
  */
-const createMap = (selectedLocation,stations) => {
+const createMap = (selectedLocation,radius,stations) => {
   mapContainer.innerHTML = '';
   map.map = new H.Map(
     mapContainer,
@@ -124,6 +137,12 @@ const createMap = (selectedLocation,stations) => {
       padding:{top:100,left:100,bottom:100,right:100}
     },
   );
+  const selectedCircle = new H.map.Circle(selectedLocation,radius * 1609.34,{visibility:false}); //Create a circle with the miles radius converted to meters.
+  map.map.addObject(selectedCircle);
+  map.map.getViewModel().setLookAtData({
+    bounds: selectedCircle.getBoundingBox()
+  });
+  map.map.addEventListener('pointermove',markerPointerStyle);
   map.behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map.map));
   map.ui = H.ui.UI.createDefault(map.map,defaultLayers);
   map.ui.setUnitSystem(H.ui.UnitSystem.IMPERIAL);
@@ -160,7 +179,7 @@ const createMap = (selectedLocation,stations) => {
       }
       return memo;
     },{})
-    var icon = new H.map.Icon(fuelIcon[station.fuel_type_code], { size: { w: 30, h: 30 } });
+    var icon = new H.map.Icon(fuelIcon[station.fuel_type_code], { size: { w: 30, h: 39.32 } });
     const marker = new H.map.Marker({lat:station.latitude,lng:station.longitude},{data, icon});
     stationMarkers[station.station_name] = marker;
     map.group.addObject(marker);
@@ -168,9 +187,6 @@ const createMap = (selectedLocation,stations) => {
   map.map.addObject(map.group);
   console.log(stationMarkers);
   map.group.addEventListener('tap',createPopup);
-  map.map.getViewModel().setLookAtData({
-    bounds: map.group.getBoundingBox()
-  });
 };
 
 /**
@@ -187,8 +203,12 @@ const clearBubbles = () => {
 const createPopup = (event)=>{
   clearBubbles();
   console.log(event.target);
-  const template = getTemplate('marker-content',event.target.getData())[0];
-  console.log(template);
+  const data = event.target.getData();
+  console.log('data',data);
+  if(localStorageData.indexOf(data.favList) > -1){
+    data.favorite = 'is-favorite';
+  }
+  const template = getTemplate('marker-content',data)[0];
   const bubble = new H.ui.InfoBubble(event.target.getGeometry(), {
     content:template
   });
@@ -227,8 +247,7 @@ const findStations = async () => {
   }
   console.log('selectedLocation',selectedLocation);
   const response = await getNearestStations(params);
-
-  createMap(selectedLocation,response.fuel_stations);
+  createMap(selectedLocation,params.radius,response.fuel_stations);
   $form.find(':is(input,select)').removeAttr('disabled');
   setSearchState(null,$('form button[type="submit"]'))
 };
@@ -323,16 +342,22 @@ const debouncedSearch = debounce(searchCities,250);
  * @param {EventObject} event - The event that triggered the function
  */
 const verifySelections = (event)=>{
+  console.log('event',event.target);
   event.preventDefault();
   const $fuelType = $('#fuel-type');
   const $evNetwork = $('#ev-network');
   const $searchRadius = $('#search-radius');
+  const $evCharger = $('#ev-charger');
   if(// Verify that the user has input the minimum required data
     ($searchInput.attr('placeholder') !== 'Using Current Location' && !userLocations[$searchInput.val()]) ||
     ($fuelType[0] && !$fuelType.val()) ||
     ($searchRadius[0] && !$searchRadius.val())
   ){
-    if($searchInput.attr('placeholder') !== 'Using Current Location' && !userLocations[$searchInput.val()]){
+    if(
+      $searchInput.attr('placeholder') !== 'Using Current Location' && 
+      !userLocations[$searchInput.val()] &&
+      $searchInput.attr('placeholder') !== 'Getting your location'
+    ){
       setSearchState('danger');
     }
     if($fuelType[0] && !$fuelType.val()){
@@ -343,7 +368,7 @@ const verifySelections = (event)=>{
     }
     return;
   }
-  [$($fuelType[0]?.parentElement),$($evNetwork[0]?.parentElement),$searchRadius]
+  [$($fuelType[0]?.parentElement),$($evNetwork[0]?.parentElement),$searchRadius,$($evCharger[0]?.parentElement)]
     .forEach($elem => {
       if($elem[0]){
         setSearchState('success',$elem);
@@ -356,7 +381,6 @@ const verifySelections = (event)=>{
 
 /**
  * Shows/hides the fuel type specific search options based on what fuel type is selected.
- * TODO: Prevent duplicate fuel specific items from being created when they already exist on the page
  * @param {DOMEvent} event - The event that triggered the function
  */
 const fuelSpecificOptions = (event) => {
@@ -370,6 +394,7 @@ const fuelSpecificOptions = (event) => {
     $('#electric-options').remove();
   }
 };
+
 const modifyLocal = async (event) => {
   console.log(event);
   const favLocals = $(event.target);
@@ -392,5 +417,5 @@ window.addEventListener('resize',()=>{
     map.map.getViewPort().resize();
   }
 });
-//TODO: Add storage of favorite stations
+//TODO: Add list of stored favorite stations.
 //#endregion

@@ -134,11 +134,10 @@
             <div class="control has-icons-left">
               <div class="select is-fullwidth">
                 <select name="fuel-type" id="fuel-type">
-                  <option value="">Select A Fuel Type</option>
                   <option value="all">All</option>
                   <option value="BD">Biodiesel (B20 And Above)</option>
                   <option value="cng">Compressed Natural Gas (CNG)</option>
-                  <option value="ELEC">Electric</option>
+                  <option value="ELEC" selected>Electric</option>
                   <option value="E85">Ethanol (E85)</option>
                   <option value="HY">Hydrogen</option>
                   <option value="LNG">Liquefied Natural Gas (LNG)</option>
@@ -212,8 +211,8 @@
           <div class="control has-icons-left">
             <div class="select">
               <select name="ev-charger" id="ev-charger">
-                <option value="all">All</option>
-                <option value="NEMA1450" selected>NEMA 14-50</option>
+                <option value="all" selected>All</option>
+                <option value="NEMA1450">NEMA 14-50</option>
                 <option value="NEMA515">NEMA 5-15</option>
                 <option value="NEMA520">NEMA 5-20</option>
                 <option value="J1772">J1772</option>
@@ -241,9 +240,9 @@
         <!-- {{/image}} -->
         <div class="card-content">
           {{#header}}
-            <div class="media">
+            <div class="media is-align-items-center">
               <div class="media-left">
-                <button id="favButton" class="material-icons" data-favorite="{{favList}}">star</button>
+                <button id="favButton" class="material-icons{{#favorite}} is-favorite{{/favorite}}" data-favorite="{{favList}}">star</button>
               </div>
               <div class="media-content">
                 <h4 class="title is-5">{{title}}</h4>
