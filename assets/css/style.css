@@ -41,9 +41,8 @@ body, .footer {
 footer {
   font-size: 12px;
   margin: 0;
-  position: relative;
+  position: fixed;
   height: 100px;
-  clear:both;
   padding-top: 40px;
   padding-bottom: 40px;
   z-index: 1;
