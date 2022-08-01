@@ -4,10 +4,11 @@ html *{
   font-weight: 400;
   font-style: normal;
 }
-
+body{
+  min-height: 100vh;
+}
 body, .footer {
   background-color: rgb(214,207,203);
-  height: 100vh;
 }
 
 .brown-card {
@@ -16,7 +17,9 @@ body, .footer {
 
 .footer {
   font-size: 12px;
-  position:relative;
-  width: 100%;
-  bottom: 0;
+  z-index:100;
+  inset:auto 0 0 0;
+  position:fixed;
+  padding:1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.19) 10px 0px 20px, rgba(0, 0, 0, 0.23) 6px 0px 6px;
 }

@@ -68,33 +68,35 @@
           </h5>
           
           <!-- Search And Location Button -->
-          <div class="column is-6-tablet is-8-desktop is-half has-text-centered">
-            <form>
-              <div class="field has-addons">
-                <div class="control is-expanded has-icons-left">
-                  <input type="search" name="location" id="location" class="input" placeholder="Location In The USA" list="possible-locations">
-                  <datalist id="possible-locations"></datalist>
-                  <span class="icon is-left">
-                    <i class="material-icons">place</i>
-                  </span>
+          <div class="columns">
+            <div class="column is-10-tablet is-8-desktop is-half has-text-centered">
+              <form>
+                <div class="field has-addons">
+                  <div class="control is-expanded has-icons-left">
+                    <input type="search" name="location" id="location" class="input" placeholder="Location In The USA" list="possible-locations">
+                    <datalist id="possible-locations"></datalist>
+                    <span class="icon is-left">
+                      <i class="material-icons">place</i>
+                    </span>
+                  </div>
+                  <div class="control has-icons-right">
+                    <button id="current-location" class="input button is-info">Use My Current Location</button>
+                    <span class="icon is-right">
+                      <i class="material-icons">gps_fixed</i>
+                    </span>
+                  </div>
                 </div>
-                <div class="control has-icons-right">
-                  <button id="current-location" class="input button is-info">Use My Current Location</button>
-                  <span class="icon is-right">
-                    <i class="material-icons">gps_fixed</i>
-                  </span>
-                </div>
-              </div>
-            </form>
-            <ul id="foundNames"></ul>
-            <div style="width:100%;aspect-ratio:1 / 1" id="map-container"></div>
+              </form>
+              <div style="width:100%;aspect-ratio:1 / 1" id="map-container"></div>
+            </div>
+            <div class="column is-10-tablet is-4-desktop">
+              <h3 class="title is-size-3 has-text-centered">Favorite Stations</h3>
+              <ul id="savedFavStations"></ul>
+            </div>
           </div>
         </div>
       </div>
       <!-- Favorites Cards -->
-      <div id="savedFavStations">
-
-      </div>
     </section>
     <!-- Footer And Slogan -->
     <section class="section">
@@ -108,14 +110,54 @@
     </section>
 
     <!-- Templates for use by JS -->
-    <template id="bulma-field">
-      <div class="field"></div>
+    <template id="fav-card-title">
+      <li class="card" id="favorite-{{id}}">
+        <header class="card-header media is-align-items-center is-justify-content-space-around p-1">
+          <div class="media-left">
+            <img src="{{icon}}" alt="{{iconalt}}" width="30" height="39.32">
+          </div>
+          <h4 class="card-header-title media-content has-text-centered">{{name}}</h4>
+          <button class="button expand-collapse card-header-icon" data-id="{{id}}">
+            <span class="icon">
+              <i class="material-icons">expand_more</i>
+            </span>
+          </button>
+        </header>
+      </li>
     </template>
-    <template id="bulma-label">
-      <label class="label"></label>
-    </template>
-    <template id="bulma-control">
-      <div class="control"></div>
+    <template id="fav-card-content">
+      <div class="card-content">
+        <div class="content has-text-centered">
+          {{#address}}
+            <button class="map-it button is-ghost" data-station="{{station}}">
+              <p>{{street}} {{city}}, {{state}} {{zip}}</p>
+            </button>
+          {{/address}}
+          <div class="station-info">
+            {{#phone}}
+              <h5>Phone:</h5><span>{{phone}}</span>
+            {{/phone}}
+            {{#hours}}
+              <h5>Hours:</h5><span>{{hours}}</span>
+            {{/hours}}
+            {{#evNetwork}}
+              <h5>EV Network:</h5><span>{{evNetwork}}</span>
+            {{/evNetwork}}
+            {{#level1}}
+              <h5>Level 1 ports:</h5><span>{{level1}}</span>
+            {{/level1}}
+            {{#level2}}
+              <h5>Level 2 ports:</h5><span>{{level2}}</span>
+            {{/level2}}
+            {{#DCFast}}
+              <h5>DC fast ports:</h5><span>{{DCFast}}</span>
+            {{/DCFast}}
+            {{#other}}
+              <h5>Other ports:</h5><span>{{other}}</span>
+            {{/other}}
+          </div>
+        </div>
+      </div>
     </template>
     <template id="final-form">
       <div>
@@ -207,6 +249,23 @@
           </div>
         </div>
         <div class="control field">
+          <label for="ev-level" class="label">Charge Level</label>
+          <div class="control has-icons-left">
+            <div class="select">
+              <select name="ev-level" id="ev-level">
+                <option value="all" selected>All</option>
+                <option value="1">Level 1</option>
+                <option value="2">Level 2</option>
+                <option value="dc_fast">DC Fast</option>
+                <option value="legacy">Legacy</option>
+              </select>
+              <span class="icon is-left">
+                <i class="material-icons">charging_station</i>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="control field">
           <label for="ev-charger" class="label">EV Connector</label>
           <div class="control has-icons-left">
             <div class="select">
@@ -231,18 +290,13 @@
     <!-- Bulma Template - HTML -->
     <template id="marker-content">
       <div class="marker card">
-        <!-- {{#image}}
-          <div class="card-image is-centered">
-            <figure class="image">
-              <img src="{{image}}" alt="{{imagealt}}">
-            </figure>
-          </div> -->
-        <!-- {{/image}} -->
         <div class="card-content">
           {{#header}}
             <div class="media is-align-items-center">
               <div class="media-left">
-                <button id="favButton" class="material-icons{{#favorite}} is-favorite{{/favorite}}" data-favorite="{{favList}}">star</button>
+                {{#favData}}
+                  <button id="favButton" class="material-icons{{#favorite}} is-favorite{{/favorite}}" data-favorite="{{favList}}" data-name="{{name}}" data-icon="{{icon}}" data-iconalt="{{iconalt}}">star</button>
+                {{/favData}}
               </div>
               <div class="media-content">
                 <h4 class="title is-5">{{title}}</h4>
@@ -260,25 +314,25 @@
               {{/address}}
               <div class="station-info">
                 {{#phone}}
-                  <h5>phone:</h5><span>{{phone}}</span>
+                  <h5>Phone:</h5><span>{{phone}}</span>
                 {{/phone}}
                 {{#hours}}
-                  <h5>hours:</h5><span>{{hours}}</span>
+                  <h5>Hours:</h5><span>{{hours}}</span>
                 {{/hours}}
                 {{#evNetwork}}
                   <h5>EV Network:</h5><span>{{evNetwork}}</span>
                 {{/evNetwork}}
                 {{#level1}}
-                  <h5>level 1 ports:</h5><span>{{level1}}</span>
+                  <h5>Level 1 ports:</h5><span>{{level1}}</span>
                 {{/level1}}
                 {{#level2}}
-                  <h5>level 2 ports:</h5><span>{{level2}}</span>
+                  <h5>Level 2 ports:</h5><span>{{level2}}</span>
                 {{/level2}}
                 {{#DCFast}}
                   <h5>DC fast ports:</h5><span>{{DCFast}}</span>
                 {{/DCFast}}
                 {{#other}}
-                  <h5>other ports:</h5><span>{{other}}</span>
+                  <h5>Other ports:</h5><span>{{other}}</span>
                 {{/other}}
               </div>
             </div>

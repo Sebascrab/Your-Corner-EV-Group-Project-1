@@ -1,6 +1,9 @@
 #map-container:empty{
   display:none;
 }
+#map-container{
+  margin-top:1rem;
+}
 .H_ib_content{
   margin:0;
 }
@@ -9,6 +12,7 @@
 }
 .H_ib_content > .card{
   width:max-content;
+  max-width:400px;
   box-shadow:none;
 }
 .station-info{
@@ -47,4 +51,21 @@
 #favButton:is(:active){
   text-shadow:rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
-/* box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px; */
+#savedFavStations{
+  display:flex;
+  flex-direction:column;
+  gap:0.5rem;
+}
+#savedFavStations .station-info{
+  justify-content: center;
+}
+.expand-collapse{
+  border:0px transparent;
+  background-color: transparent;
+  border-radius:0;
+  cursor:pointer;
+}
+.card-header + .card-content{
+  padding-top:0;
+  margin-top:-1rem;
+}
