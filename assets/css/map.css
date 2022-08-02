@@ -56,6 +56,15 @@
   flex-direction:column;
   gap:0.5rem;
 }
+#savedFavStations header{
+  display:grid;
+  grid-template-columns:30px 1fr auto;
+  gap:0.5rem;
+  align-items:center;
+}
+#savedFavStations header h4{
+  word-break: break-word;
+}
 #savedFavStations .station-info{
   justify-content: center;
 }

@@ -93,7 +93,7 @@
               </form>
               <div style="width:100%;aspect-ratio:1 / 1" id="map-container"></div>
             </div>
-            <div class="column is-one-third is-pulled-right">
+            <div class="column is-one-third">
               <h3 class="title is-size-3 has-text-centered">Favorite Stations</h3>
               <ul id="savedFavStations"></ul>
             </div>
@@ -115,16 +115,10 @@
   <!-- Templates for use by JS -->
   <template id="fav-card-title">
     <li class="card" id="favorite-{{id}}">
-      <header class="card-header media is-align-items-center is-justify-content-space-around p-1">
-        <div class="media-left">
-          <img src="{{icon}}" alt="{{iconalt}}" width="30" height="39.32">
-        </div>
+      <header class="p-1">
+        <img src="{{icon}}" alt="{{iconalt}}" width="30" height="39.32">
         <h4 class="card-header-title media-content has-text-centered">{{name}}</h4>
-        <button class="button expand-collapse card-header-icon" data-id="{{id}}">
-          <span class="icon">
-            <i class="material-icons">expand_more</i>
-          </span>
-        </button>
+        <button class="material-icons expand-collapse" data-id="{{id}}">expand_more</button>
       </header>
     </li>
   </template>
