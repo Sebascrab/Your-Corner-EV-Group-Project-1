@@ -41,7 +41,7 @@ body, .footer {
 footer {
   font-size: 12px;
   margin: 0;
-  position: fixed;
+  position: relative;
   height: 100px;
   padding-top: 40px;
   padding-bottom: 40px;
