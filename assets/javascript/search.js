@@ -139,15 +139,12 @@ const toggleFavoriteCard = async (event) => {
   const $button = event.target.tagName === 'BUTTON' ?
     $(event.target) :
     $(event.target.parentElement.parentElement);
-  const $icon = event.target.tagName === 'I' ?
-    $(event.target) :
-    $('i',$button);
   const id = $button.data('id');
   const $card = $button.parents('.card');
   const $content = $('.card-content',$card);
   if($content[0]){
     $content.remove();
-    $icon.text('expand_more');
+    $button.text('expand_more');
     return;
   }
   $button.addClass('is-loading');
@@ -155,7 +152,7 @@ const toggleFavoriteCard = async (event) => {
   console.log(station);
   getTemplate('fav-card-content',{...popupContent(station),station:JSON.stringify(station)})
     .appendTo($card);
-  $icon.text('expand_less');
+  $button.text('expand_less');
   $button.removeClass('is-loading');
 };
 
