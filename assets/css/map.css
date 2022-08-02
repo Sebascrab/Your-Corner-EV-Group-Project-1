@@ -12,6 +12,9 @@ form .column {
 form .columns {
   flex-wrap: wrap;
 }
+form :is(.column,.columns):not(:last-child){
+  margin:0;
+}
 .H_ib_content{
   margin:0;
 }
