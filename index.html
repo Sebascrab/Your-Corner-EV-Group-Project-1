@@ -83,9 +83,9 @@
                       <i class="material-icons">place</i>
                     </span>
                   </div>
-                  <div class="control has-icons-right">
-                    <button id="current-location" class="input button is-info">Use My Current Location</button>
-                    <span class="icon is-right">
+                  <div class="control">
+                    <button id="current-location" class="input button is-info material-icons">gps_fixed</button>
+                    <span class="icon is-right" style="display:none;">
                       <i class="material-icons">gps_fixed</i>
                     </span>
                   </div>
@@ -158,8 +158,8 @@
   </template>
   <template id="final-form">
     <div>
-      <div class="field is-grouped" id="advanced-options">
-        <div class="control field">
+      <div class="columns" id="advanced-options">
+        <div class="column field">
           <label for="search-radius" class="label">Distance</label>
           <div class="control has-icons-right">
             <input type="number" name="search-radius" id="search-radius" class="input" value="10">
@@ -168,7 +168,7 @@
             </span>
           </div>
         </div>
-        <div class="control field">
+        <div class="column field">
           <label for="fuel-type" class="label">Fuel Type</label>
           <div class="control has-icons-left">
             <div class="select is-fullwidth">
@@ -197,12 +197,12 @@
     </div>
   </template>
   <template id="elec-options">
-    <div class="field is-grouped" id="electric-options">
-      <div class="control field">
+    <div class="columns" id="electric-options">
+      <div class="column field">
         <label for="pay-network" class="label">EV Network</label>
         <div class="control has-icons-left">
-          <div class="select">
-            <select name="ev-network" id="ev-network" class="select">
+          <div class="select is-fullwidth">
+            <select name="ev-network" id="ev-network" class="select ">
               <option value="all" selected>All</option>
               <option value="AddÉnergie Technologies">AddÉnergie</option>
               <option value="AMPUP">AmpUp</option>
@@ -245,10 +245,10 @@
           </span>
         </div>
       </div>
-      <div class="control field">
+      <div class="column field">
         <label for="ev-level" class="label">EV Level</label>
         <div class="control has-icons-left">
-          <div class="select">
+          <div class="select is-fullwidth">
             <select name="ev-level" id="ev-level">
               <option value="all">All</option>
               <option value="1">Level 1</option>
@@ -262,10 +262,10 @@
           </div>
         </div>
       </div>
-      <div class="control field">
+      <div class="column field">
         <label for="ev-charger" class="label">EV Connector</label>
         <div class="control has-icons-left">
-          <div class="select">
+          <div class="select is-fullwidth">
             <select name="ev-charger" id="ev-charger">
               <option value="all" selected>All</option>
               <option value="NEMA1450">NEMA 14-50</option>

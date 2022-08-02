@@ -4,6 +4,14 @@
 #map-container{
   margin-top:1rem;
 }
+form .column {
+  flex-shrink: 0;
+  /* flex-basis: auto; */
+  min-width: max-content;
+}
+form .columns {
+  flex-wrap: wrap;
+}
 .H_ib_content{
   margin:0;
 }
