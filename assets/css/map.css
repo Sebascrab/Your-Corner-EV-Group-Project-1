@@ -82,7 +82,7 @@ form .columns {
   border-radius:0;
   cursor:pointer;
 }
-.card-header + .card-content{
+header + .card-content{
   padding-top:0;
   margin-top:-1rem;
 }

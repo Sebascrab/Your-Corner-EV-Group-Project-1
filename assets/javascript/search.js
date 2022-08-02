@@ -526,7 +526,7 @@ window.addEventListener('resize',(event)=>{
     map.map.getViewPort().resize();
   }
 });
-$favUl.on('click','.card-header-icon',toggleFavoriteCard);
+$favUl.on('click','.expand-collapse',toggleFavoriteCard);
 $favUl.on('click','.map-it',mapFavorite);
 //TODO: Add list of stored favorite stations.
 //#endregion
