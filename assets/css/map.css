@@ -4,6 +4,17 @@
 #map-container{
   margin-top:1rem;
 }
+form .column {
+  flex-shrink: 0;
+  /* flex-basis: auto; */
+  min-width: max-content;
+}
+form .columns {
+  flex-wrap: wrap;
+}
+form :is(.column,.columns):not(:last-child){
+  margin:0;
+}
 .H_ib_content{
   margin:0;
 }
@@ -56,6 +67,15 @@
   flex-direction:column;
   gap:0.5rem;
 }
+#savedFavStations header{
+  display:grid;
+  grid-template-columns:30px 1fr auto;
+  gap:0.5rem;
+  align-items:center;
+}
+#savedFavStations header h4{
+  word-break: break-word;
+}
 #savedFavStations .station-info{
   justify-content: center;
 }
@@ -65,7 +85,7 @@
   border-radius:0;
   cursor:pointer;
 }
-.card-header + .card-content{
+header + .card-content{
   padding-top:0;
   margin-top:-1rem;
 }

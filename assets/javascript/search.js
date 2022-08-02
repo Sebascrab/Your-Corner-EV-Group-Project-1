@@ -498,9 +498,17 @@ const modifyLocal = async (event) => {
 
 const resizeSearchButton = ()=>{
   if(window.innerWidth <= 1000){
-    $currentButton.empty();
+    $currentButton.text('gps_fixed');
+    $currentButton.addClass('material-icons');
+    $currentButton.parent().removeClass('has-icons-right');
+    $currentButton.css({'font-size':'24px',height:'auto','padding':'0 0.5rem'})
+    $('#current-location + span').hide();
   }else if(~$currentButton.text()){
     $currentButton.text('Use My Current Location');
+    $currentButton.removeClass('material-icons');
+    $('#current-location + span').show();
+    $currentButton.parent().addClass('has-icons-right');
+    $currentButton.css({'font-size':'',height:'','padding':''})
   }
 }
 //#endregion Listener Functions
@@ -518,7 +526,7 @@ window.addEventListener('resize',(event)=>{
     map.map.getViewPort().resize();
   }
 });
-$favUl.on('click','.card-header-icon',toggleFavoriteCard);
+$favUl.on('click','.expand-collapse',toggleFavoriteCard);
 $favUl.on('click','.map-it',mapFavorite);
 //TODO: Add list of stored favorite stations.
 //#endregion
