@@ -1,18 +1,71 @@
 #map-container:empty{
   display:none;
 }
+#map-container{
+  margin-top:1rem;
+}
 .H_ib_content{
   margin:0;
-  max-width:90%;
 }
 .H_ib_content > .card p{
   margin-bottom:0;
 }
 .H_ib_content > .card{
   width:max-content;
+  max-width:400px;
   box-shadow:none;
 }
 .station-info{
   display:grid;
   grid-template-columns:auto 1fr;
+}
+.H_ib_tail{
+  right:7px;
+}
+.H_ib_tail:before{
+  left: 0;
+  border-width:17px;
+  right:auto;
+}
+.H_ib_tail:after{
+  border-width: 17px 17px 0px 17px !important;
+}
+#favButton{
+  padding:0;
+  box-shadow:none;
+  border:none;
+  border-radius:initial;
+  background-color:transparent;
+  transition-property:color,text-shadow;
+  transition-duration:500ms;
+  cursor: pointer;
+  color:black;
+  text-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+}
+#favButton.is-favorite{
+  color:#ffe08a;
+}
+#favButton:is(:hover,:focus){
+  text-shadow:rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+#favButton:is(:active){
+  text-shadow:rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+#savedFavStations{
+  display:flex;
+  flex-direction:column;
+  gap:0.5rem;
+}
+#savedFavStations .station-info{
+  justify-content: center;
+}
+.expand-collapse{
+  border:0px transparent;
+  background-color: transparent;
+  border-radius:0;
+  cursor:pointer;
+}
+.card-header + .card-content{
+  padding-top:0;
+  margin-top:-1rem;
 }

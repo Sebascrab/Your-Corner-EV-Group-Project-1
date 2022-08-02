@@ -8,7 +8,7 @@
 <br />
 <div align="center">
 <a href="https://github.com/Kurohyou-Studios/your-corner-ev">
-<img src="images/logo.png" alt="Logo" width="80" height="80">
+<img src="assets/images/LOGOEV-128.png" alt="Logo" width="80" height="91.186">
 </a>
 <h3 align="center">Your Corner EV</h3>
 <p align="center">

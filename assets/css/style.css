@@ -9,10 +9,11 @@ html *{
   font-weight: 400;
   font-style: normal;
 }
-
 body{
-  background-color: rgb(214,207,203) !important;
-  height: 100vh;
+  min-height: 100vh;
+}
+body, .footer {
+  background-color: rgb(214,207,203);
 }
 
 .upperText {
@@ -40,9 +41,8 @@ body{
 footer {
   font-size: 12px;
   margin: 0;
-  position: relative;
+  position: fixed;
   height: 100px;
-  clear:both;
   padding-top: 40px;
   padding-bottom: 40px;
   z-index: 1;
