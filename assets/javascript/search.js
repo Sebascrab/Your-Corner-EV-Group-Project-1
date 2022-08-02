@@ -495,6 +495,14 @@ const modifyLocal = async (event) => {
   updateFavoriteList(stationId);
   localStorage.setItem('FavoriteStations',JSON.stringify(localStorageData));
 }
+
+const resizeSearchButton = ()=>{
+  if(window.innerWidth <= 1000){
+    $currentButton.empty();
+  }else if(~$currentButton.text()){
+    $currentButton.text('Use My Current Location');
+  }
+}
 //#endregion Listener Functions
 
 //#region Listener declarations
@@ -503,8 +511,9 @@ $form.submit(verifySelections);
 $searchInput.on('input',debouncedSearch);
 $searchInput.change(debouncedSearch);
 $('#map-container').on('click','#favButton',modifyLocal);
-window.addEventListener('resize',()=>{
+window.addEventListener('resize',(event)=>{
   //If a map has been created, resize it when the viewport is resized.
+  resizeSearchButton();
   if(map.map){
     map.map.getViewPort().resize();
   }
@@ -514,3 +523,4 @@ $favUl.on('click','.map-it',mapFavorite);
 //TODO: Add list of stored favorite stations.
 //#endregion
 showFavorites();
+resizeSearchButton();
