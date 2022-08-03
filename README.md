@@ -57,28 +57,23 @@ Built by the Charge dEVs
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
-TOD: Built with
+NREL (National Renewable Energy Laboratoy)
+Here API
+HTML 5 Geolocation
+Bulma
+JQuery
+Font Awesome
+Google Fonts
+Adobe Fonts
+Mustache (Fake Handlebar)
 <p align="right">(<a href="#top">back to top</a>)</p>
 <!-- GETTING STARTED -->
 
 ## Getting Started
-TODO: Getting started
+Upon arrival to the website, enter an address or use the current location to bring up options to narrow down your alternative fuel options. 
 ### Prerequisites
-TODO: Prerequisities
-### Installation
-TODO
-<p align="right">(<a href="#top">back to top</a>)</p>
-<!-- USAGE EXAMPLES -->
+Access to the internet, and a functional input device. (Keyboard or Finger). Does not work on IE Explorer.
 
-## Usage
-TODO
-<p align="right">(<a href="#top">back to top</a>)</p>
-<!-- ROADMAP -->
-
-## Roadmap
-TODO
-See the [open issues](https://github.com/Kurohyou-Studios/your-corner-ev/issues) for a full list of proposed features (and known issues).
-<p align="right">(<a href="#top">back to top</a>)</p>
 <!-- CONTRIBUTING -->
 
 ## Contributing
@@ -100,17 +95,28 @@ Distributed under the MIT License. See [LICENSE.txt](LICENSE.txt) for more infor
 
 ## Contact
 Scott Casey - [@Kurohyoustudios](https://twitter.com/Kurohyoustudios) - scaseydv@gmail.com
+
+Sebastian Tischner
+
+Tommy Alvarado
+
+Ryan Charleson
+
 Project Link: [https://github.com/Kurohyou-Studios/your-corner-ev](https://github.com/Kurohyou-Studios/your-corner-ev)
 <p align="right">(<a href="#top">back to top</a>)</p>
 <!-- ACKNOWLEDGMENTS -->
 
 ## Acknowledgments
-TODO
 <a href="https://www.flaticon.com/free-icons/flash" title="flash icons">Flash icons created by Smashicons - Flaticon</a>
+
 <a href="https://www.flaticon.com/free-icons/biodiesel" title="biodiesel icons">Biodiesel icons created by Freepik - Flaticon</a>
+
 <a href="https://www.flaticon.com/free-icons/corn" title="corn icons">Corn icons created by Freepik - Flaticon</a>
+
 <a href="https://www.flaticon.com/free-icons/hydrogen" title="hydrogen icons">Hydrogen icons created by Smashicons - Flaticon</a>
+
 <a href="https://www.flaticon.com/free-icons/gas" title="gas icons">Gas icons created by Kiranshastry - Flaticon</a>
+
 <a href="https://www.flaticon.com/free-icons/tree" title="tree icons">Tree icons created by Freepik - Flaticon</a>
 
 This readme template adapted from the [Best-README-Template](https://github.com/othneildrew/Best-README-Template/blob/master/BLANK_README.md) by [Othneil Drew](https://github.com/othneildrew).
