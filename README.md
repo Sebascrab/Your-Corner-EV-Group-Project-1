@@ -54,6 +54,7 @@ A Tracker to find the closest available charging station for your EV.
 ## About The Project
 ![Product Name Screen Shot][product-screenshot]
 Built by the Charge dEVs
+Winner of "The Unicorn" and "Utility" awards.
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
