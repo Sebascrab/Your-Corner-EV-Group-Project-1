@@ -22,6 +22,8 @@ A Tracker to find the closest available charging station for your EV.
 <a href="https://github.com/Kurohyou-Studios/your-corner-ev/issues">Report Bug</a>
 ·
 <a href="https://github.com/Kurohyou-Studios/your-corner-ev/issues">Request Feature</a>
+
+Deployed: https://sebascrab.github.io/Your-Corner-EV-Group-Project-1/
 </p>
 </div>
 <!-- TABLE OF CONTENTS -->
